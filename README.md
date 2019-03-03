@@ -1,5 +1,5 @@
 # EntityMappingDBEmit
-DB与实体转换
+DB与实体转换(已经上传neuget,名称：EntityMappingDBEmitCore)
 
 采用emit方法DataTable,IDataReader与实体相互转换。
 

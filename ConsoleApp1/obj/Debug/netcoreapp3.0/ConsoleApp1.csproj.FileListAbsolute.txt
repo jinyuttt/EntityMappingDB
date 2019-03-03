@@ -1,0 +1,15 @@
+E:\Study\vs\Test\EntityMappingDBEmit\ConsoleApp1\obj\Debug\netcoreapp3.0\ConsoleApp1.csprojAssemblyReference.cache
+E:\Study\vs\Test\EntityMappingDBEmit\ConsoleApp1\obj\Debug\netcoreapp3.0\ConsoleApp1.csproj.CoreCompileInputs.cache
+E:\Study\vs\Test\EntityMappingDBEmit\ConsoleApp1\obj\Debug\netcoreapp3.0\ConsoleApp1.AssemblyInfoInputs.cache
+E:\Study\vs\Test\EntityMappingDBEmit\ConsoleApp1\obj\Debug\netcoreapp3.0\ConsoleApp1.AssemblyInfo.cs
+E:\Study\vs\Test\EntityMappingDBEmit\ConsoleApp1\bin\Debug\netcoreapp3.0\ConsoleApp1.exe
+E:\Study\vs\Test\EntityMappingDBEmit\ConsoleApp1\bin\Debug\netcoreapp3.0\ConsoleApp1.deps.json
+E:\Study\vs\Test\EntityMappingDBEmit\ConsoleApp1\bin\Debug\netcoreapp3.0\ConsoleApp1.runtimeconfig.json
+E:\Study\vs\Test\EntityMappingDBEmit\ConsoleApp1\bin\Debug\netcoreapp3.0\ConsoleApp1.runtimeconfig.dev.json
+E:\Study\vs\Test\EntityMappingDBEmit\ConsoleApp1\bin\Debug\netcoreapp3.0\ConsoleApp1.dll
+E:\Study\vs\Test\EntityMappingDBEmit\ConsoleApp1\bin\Debug\netcoreapp3.0\ConsoleApp1.pdb
+E:\Study\vs\Test\EntityMappingDBEmit\ConsoleApp1\bin\Debug\netcoreapp3.0\EntityMappingDBEmitCore.dll
+E:\Study\vs\Test\EntityMappingDBEmit\ConsoleApp1\bin\Debug\netcoreapp3.0\EntityMappingDBEmitCore.pdb
+E:\Study\vs\Test\EntityMappingDBEmit\ConsoleApp1\obj\Debug\netcoreapp3.0\ConsoleApp1.csproj.CopyComplete
+E:\Study\vs\Test\EntityMappingDBEmit\ConsoleApp1\obj\Debug\netcoreapp3.0\ConsoleApp1.dll
+E:\Study\vs\Test\EntityMappingDBEmit\ConsoleApp1\obj\Debug\netcoreapp3.0\ConsoleApp1.pdb

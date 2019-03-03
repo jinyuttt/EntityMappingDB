@@ -1,0 +1,45 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.0",
+    "signature": "dcf350364aed7e056ec8cd653153ce173af26999"
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.0": {
+      "ConsoleApp1/1.0.0": {
+        "dependencies": {
+          "EntityMappingDBEmitCore": "1.0.0",
+          "runtime.win-x64.Microsoft.NETCore.DotNetAppHost": "3.0.0-preview-27324-5"
+        },
+        "runtime": {
+          "ConsoleApp1.dll": {}
+        }
+      },
+      "runtime.win-x64.Microsoft.NETCore.DotNetAppHost/3.0.0-preview-27324-5": {},
+      "EntityMappingDBEmitCore/1.0.0": {
+        "runtime": {
+          "EntityMappingDBEmitCore.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ConsoleApp1/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "runtime.win-x64.Microsoft.NETCore.DotNetAppHost/3.0.0-preview-27324-5": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-bbNyZdnpIuw+C8Rvwn5VauRExwyiegPhQDwyQy40L7bdeIVrCW9tCzSxK6HHjuhWx8F5d+UCgTkCI2JEIYU66Q==",
+      "path": "runtime.win-x64.microsoft.netcore.dotnetapphost/3.0.0-preview-27324-5",
+      "hashPath": "runtime.win-x64.microsoft.netcore.dotnetapphost.3.0.0-preview-27324-5.nupkg.sha512"
+    },
+    "EntityMappingDBEmitCore/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

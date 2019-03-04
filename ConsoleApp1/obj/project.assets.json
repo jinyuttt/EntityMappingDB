@@ -172,7 +172,7 @@
           "ref/netstandard1.3/System.Threading.Tasks.dll": {}
         }
       },
-      "EntityMappingDBEmit/1.0.0": {
+      "EntityMappingDBEmit/1.1.0": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
@@ -1205,7 +1205,7 @@
         "system.threading.tasks.nuspec"
       ]
     },
-    "EntityMappingDBEmit/1.0.0": {
+    "EntityMappingDBEmit/1.1.0": {
       "type": "project",
       "path": "../EntityMappingDB/EntityMappingDBEmit.csproj",
       "msbuildProject": "../EntityMappingDB/EntityMappingDBEmit.csproj"
@@ -1213,7 +1213,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.0": [
-      "EntityMappingDBEmit >= 1.0.0",
+      "EntityMappingDBEmit >= 1.1.0",
       "Microsoft.NETCore.App >= 3.0.0-preview-27324-5",
       "Microsoft.NETCore.Platforms >= 3.0.0-preview.19073.11",
       "runtime.win-x64.Microsoft.NETCore.DotNetAppHost >= 3.0.0-preview-27324-5"

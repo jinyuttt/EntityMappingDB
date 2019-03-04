@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\EntityMappingDBEmit\EntityMappingDBEmitCore.csproj" />
+    <ProjectReference Include="..\EntityMappingDB\EntityMappingDBEmit.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Study\\vs\\Test\\EntityMappingDBEmit\\ConsoleApp1\\ConsoleApp1.csproj": {}
+    "E:\\Study\\vs\\Test\\EntityMappingDBEmit\\EntityMappingDBEmit\\ConsoleApp1\\ConsoleApp1.csproj": {}
   },
   "projects": {
-    "E:\\Study\\vs\\Test\\EntityMappingDBEmit\\ConsoleApp1\\ConsoleApp1.csproj": {
+    "E:\\Study\\vs\\Test\\EntityMappingDBEmit\\EntityMappingDBEmit\\ConsoleApp1\\ConsoleApp1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Study\\vs\\Test\\EntityMappingDBEmit\\ConsoleApp1\\ConsoleApp1.csproj",
+        "projectUniqueName": "E:\\Study\\vs\\Test\\EntityMappingDBEmit\\EntityMappingDBEmit\\ConsoleApp1\\ConsoleApp1.csproj",
         "projectName": "ConsoleApp1",
-        "projectPath": "E:\\Study\\vs\\Test\\EntityMappingDBEmit\\ConsoleApp1\\ConsoleApp1.csproj",
+        "projectPath": "E:\\Study\\vs\\Test\\EntityMappingDBEmit\\EntityMappingDBEmit\\ConsoleApp1\\ConsoleApp1.csproj",
         "packagesPath": "C:\\Users\\jinyu\\.nuget\\packages\\",
-        "outputPath": "E:\\Study\\vs\\Test\\EntityMappingDBEmit\\ConsoleApp1\\obj\\",
+        "outputPath": "E:\\Study\\vs\\Test\\EntityMappingDBEmit\\EntityMappingDBEmit\\ConsoleApp1\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -35,8 +35,8 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "E:\\Study\\vs\\Test\\EntityMappingDBEmit\\EntityMappingDBEmit\\EntityMappingDBEmitCore.csproj": {
-                "projectPath": "E:\\Study\\vs\\Test\\EntityMappingDBEmit\\EntityMappingDBEmit\\EntityMappingDBEmitCore.csproj"
+              "E:\\Study\\vs\\Test\\EntityMappingDBEmit\\EntityMappingDBEmit\\EntityMappingDB\\EntityMappingDBEmit.csproj": {
+                "projectPath": "E:\\Study\\vs\\Test\\EntityMappingDBEmit\\EntityMappingDBEmit\\EntityMappingDB\\EntityMappingDBEmit.csproj"
               }
             }
           }
@@ -78,14 +78,14 @@
         }
       }
     },
-    "E:\\Study\\vs\\Test\\EntityMappingDBEmit\\EntityMappingDBEmit\\EntityMappingDBEmitCore.csproj": {
+    "E:\\Study\\vs\\Test\\EntityMappingDBEmit\\EntityMappingDBEmit\\EntityMappingDB\\EntityMappingDBEmit.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\Study\\vs\\Test\\EntityMappingDBEmit\\EntityMappingDBEmit\\EntityMappingDBEmitCore.csproj",
-        "projectName": "EntityMappingDBEmitCore",
-        "projectPath": "E:\\Study\\vs\\Test\\EntityMappingDBEmit\\EntityMappingDBEmit\\EntityMappingDBEmitCore.csproj",
+        "projectUniqueName": "E:\\Study\\vs\\Test\\EntityMappingDBEmit\\EntityMappingDBEmit\\EntityMappingDB\\EntityMappingDBEmit.csproj",
+        "projectName": "EntityMappingDBEmit",
+        "projectPath": "E:\\Study\\vs\\Test\\EntityMappingDBEmit\\EntityMappingDBEmit\\EntityMappingDB\\EntityMappingDBEmit.csproj",
         "packagesPath": "C:\\Users\\jinyu\\.nuget\\packages\\",
-        "outputPath": "E:\\Study\\vs\\Test\\EntityMappingDBEmit\\EntityMappingDBEmit\\obj\\",
+        "outputPath": "E:\\Study\\vs\\Test\\EntityMappingDBEmit\\EntityMappingDBEmit\\EntityMappingDB\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -96,7 +96,7 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp3.0"
+          "netstandard2.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -107,7 +107,7 @@
           "https://dotnetfeed.blob.core.windows.net/dotnet-windowsdesktop/index.json": {}
         },
         "frameworks": {
-          "netcoreapp3.0": {
+          "netstandard2.0": {
             "projectReferences": {}
           }
         },
@@ -118,19 +118,17 @@
         }
       },
       "frameworks": {
-        "netcoreapp3.0": {
+        "netstandard2.0": {
           "dependencies": {
-            "Microsoft.NETCore.App": {
-              "include": "None",
+            "NETStandard.Library": {
               "suppressParent": "All",
               "target": "Package",
-              "version": "[3.0.0-preview-27324-5, )",
+              "version": "[2.0.3, )",
               "autoReferenced": true
             },
-            "Microsoft.NETCore.Platforms": {
+            "System.Reflection.Emit.Lightweight": {
               "target": "Package",
-              "version": "[3.0.0-preview.19073.11, )",
-              "autoReferenced": true
+              "version": "[4.3.0, )"
             }
           },
           "imports": [

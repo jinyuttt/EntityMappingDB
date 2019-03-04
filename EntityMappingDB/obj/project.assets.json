@@ -1,38 +1,8 @@
 {
   "version": 3,
   "targets": {
-    ".NETCoreApp,Version=v3.0": {
-      "Microsoft.NETCore.App/3.0.0-preview-27324-5": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.NETCore.DotNetHostPolicy": "3.0.0-preview-27324-5",
-          "Microsoft.NETCore.Platforms": "3.0.0-preview.19073.11",
-          "Microsoft.NETCore.Targets": "2.0.0",
-          "NETStandard.Library": "2.0.3"
-        },
-        "compile": {
-          "ref/netcoreapp3.0/_._": {}
-        },
-        "build": {
-          "build/netcoreapp3.0/_._": {}
-        }
-      },
-      "Microsoft.NETCore.DotNetAppHost/3.0.0-preview-27324-5": {
-        "type": "package"
-      },
-      "Microsoft.NETCore.DotNetHostPolicy/3.0.0-preview-27324-5": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.NETCore.DotNetHostResolver": "3.0.0-preview-27324-5"
-        }
-      },
-      "Microsoft.NETCore.DotNetHostResolver/3.0.0-preview-27324-5": {
-        "type": "package",
-        "dependencies": {
-          "Microsoft.NETCore.DotNetAppHost": "3.0.0-preview-27324-5"
-        }
-      },
-      "Microsoft.NETCore.Platforms/3.0.0-preview.19073.11": {
+    ".NETStandard,Version=v2.0": {
+      "Microsoft.NETCore.Platforms/1.1.0": {
         "type": "package",
         "compile": {
           "lib/netstandard1.0/_._": {}
@@ -41,7 +11,7 @@
           "lib/netstandard1.0/_._": {}
         }
       },
-      "Microsoft.NETCore.Targets/2.0.0": {
+      "Microsoft.NETCore.Targets/1.1.0": {
         "type": "package",
         "compile": {
           "lib/netstandard1.0/_._": {}
@@ -62,16 +32,7 @@
           "lib/netstandard1.0/_._": {}
         },
         "build": {
-          "build/netstandard2.0/_._": {}
-        }
-      },
-      "runtime.win-x64.Microsoft.NETCore.DotNetAppHost/3.0.0-preview-27324-5": {
-        "type": "package",
-        "runtimeTargets": {
-          "runtimes/win-x64/native/_._": {
-            "assetType": "native",
-            "rid": "win-x64"
-          }
+          "build/netstandard2.0/NETStandard.Library.targets": {}
         }
       },
       "System.IO/4.3.0": {
@@ -171,366 +132,37 @@
         "compile": {
           "ref/netstandard1.3/System.Threading.Tasks.dll": {}
         }
-      },
-      "EntityMappingDBEmit/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v2.0",
-        "dependencies": {
-          "System.Reflection.Emit.Lightweight": "4.3.0"
-        },
-        "compile": {
-          "bin/placeholder/EntityMappingDBEmit.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/EntityMappingDBEmit.dll": {}
-        }
       }
     }
   },
   "libraries": {
-    "Microsoft.NETCore.App/3.0.0-preview-27324-5": {
-      "sha512": "ItE88/TvYoVD9tlo1AtlFKwoPOEQb0RnSwoV1GG3Eu1T8AwyLES81vP9ZIhas0A2hdWCbiMc8ED0D84MfJI9zg==",
+    "Microsoft.NETCore.Platforms/1.1.0": {
+      "sha512": "bLpT1f/SFlO1CzqXG12KnJzpZs6lv24uX2Rzi4Fmm0noJpNlnWRVryuO3yK18Ca04t/YHcO1e1Z0WDfjseqNzw==",
       "type": "package",
-      "path": "microsoft.netcore.app/3.0.0-preview-27324-5",
+      "path": "microsoft.netcore.platforms/1.1.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "LICENSE.TXT",
-        "Microsoft.NETCore.App.versions.txt",
-        "THIRD-PARTY-NOTICES.TXT",
-        "build/netcoreapp3.0/Microsoft.NETCore.App.PlatformManifest.txt",
-        "build/netcoreapp3.0/Microsoft.NETCore.App.props",
-        "build/netcoreapp3.0/Microsoft.NETCore.App.targets",
-        "microsoft.netcore.app.3.0.0-preview-27324-5.nupkg.sha512",
-        "microsoft.netcore.app.nuspec",
-        "ref/netcoreapp3.0/Microsoft.CSharp.dll",
-        "ref/netcoreapp3.0/Microsoft.CSharp.xml",
-        "ref/netcoreapp3.0/Microsoft.VisualBasic.Core.dll",
-        "ref/netcoreapp3.0/Microsoft.VisualBasic.dll",
-        "ref/netcoreapp3.0/Microsoft.Win32.Primitives.dll",
-        "ref/netcoreapp3.0/Microsoft.Win32.Primitives.xml",
-        "ref/netcoreapp3.0/System.AppContext.dll",
-        "ref/netcoreapp3.0/System.Buffers.dll",
-        "ref/netcoreapp3.0/System.Buffers.xml",
-        "ref/netcoreapp3.0/System.Collections.Concurrent.dll",
-        "ref/netcoreapp3.0/System.Collections.Concurrent.xml",
-        "ref/netcoreapp3.0/System.Collections.Immutable.dll",
-        "ref/netcoreapp3.0/System.Collections.Immutable.xml",
-        "ref/netcoreapp3.0/System.Collections.NonGeneric.dll",
-        "ref/netcoreapp3.0/System.Collections.NonGeneric.xml",
-        "ref/netcoreapp3.0/System.Collections.Specialized.dll",
-        "ref/netcoreapp3.0/System.Collections.Specialized.xml",
-        "ref/netcoreapp3.0/System.Collections.dll",
-        "ref/netcoreapp3.0/System.Collections.xml",
-        "ref/netcoreapp3.0/System.ComponentModel.Annotations.dll",
-        "ref/netcoreapp3.0/System.ComponentModel.Annotations.xml",
-        "ref/netcoreapp3.0/System.ComponentModel.DataAnnotations.dll",
-        "ref/netcoreapp3.0/System.ComponentModel.EventBasedAsync.dll",
-        "ref/netcoreapp3.0/System.ComponentModel.EventBasedAsync.xml",
-        "ref/netcoreapp3.0/System.ComponentModel.Primitives.dll",
-        "ref/netcoreapp3.0/System.ComponentModel.Primitives.xml",
-        "ref/netcoreapp3.0/System.ComponentModel.TypeConverter.dll",
-        "ref/netcoreapp3.0/System.ComponentModel.TypeConverter.xml",
-        "ref/netcoreapp3.0/System.ComponentModel.dll",
-        "ref/netcoreapp3.0/System.ComponentModel.xml",
-        "ref/netcoreapp3.0/System.Configuration.dll",
-        "ref/netcoreapp3.0/System.Console.dll",
-        "ref/netcoreapp3.0/System.Console.xml",
-        "ref/netcoreapp3.0/System.Core.dll",
-        "ref/netcoreapp3.0/System.Data.Common.dll",
-        "ref/netcoreapp3.0/System.Data.Common.xml",
-        "ref/netcoreapp3.0/System.Data.dll",
-        "ref/netcoreapp3.0/System.Diagnostics.Contracts.dll",
-        "ref/netcoreapp3.0/System.Diagnostics.Contracts.xml",
-        "ref/netcoreapp3.0/System.Diagnostics.Debug.dll",
-        "ref/netcoreapp3.0/System.Diagnostics.Debug.xml",
-        "ref/netcoreapp3.0/System.Diagnostics.DiagnosticSource.dll",
-        "ref/netcoreapp3.0/System.Diagnostics.DiagnosticSource.xml",
-        "ref/netcoreapp3.0/System.Diagnostics.FileVersionInfo.dll",
-        "ref/netcoreapp3.0/System.Diagnostics.FileVersionInfo.xml",
-        "ref/netcoreapp3.0/System.Diagnostics.Process.dll",
-        "ref/netcoreapp3.0/System.Diagnostics.Process.xml",
-        "ref/netcoreapp3.0/System.Diagnostics.StackTrace.dll",
-        "ref/netcoreapp3.0/System.Diagnostics.StackTrace.xml",
-        "ref/netcoreapp3.0/System.Diagnostics.TextWriterTraceListener.dll",
-        "ref/netcoreapp3.0/System.Diagnostics.TextWriterTraceListener.xml",
-        "ref/netcoreapp3.0/System.Diagnostics.Tools.dll",
-        "ref/netcoreapp3.0/System.Diagnostics.Tools.xml",
-        "ref/netcoreapp3.0/System.Diagnostics.TraceSource.dll",
-        "ref/netcoreapp3.0/System.Diagnostics.TraceSource.xml",
-        "ref/netcoreapp3.0/System.Diagnostics.Tracing.dll",
-        "ref/netcoreapp3.0/System.Diagnostics.Tracing.xml",
-        "ref/netcoreapp3.0/System.Drawing.Primitives.dll",
-        "ref/netcoreapp3.0/System.Drawing.Primitives.xml",
-        "ref/netcoreapp3.0/System.Drawing.dll",
-        "ref/netcoreapp3.0/System.Dynamic.Runtime.dll",
-        "ref/netcoreapp3.0/System.Globalization.Calendars.dll",
-        "ref/netcoreapp3.0/System.Globalization.Extensions.dll",
-        "ref/netcoreapp3.0/System.Globalization.dll",
-        "ref/netcoreapp3.0/System.IO.Compression.Brotli.dll",
-        "ref/netcoreapp3.0/System.IO.Compression.Brotli.xml",
-        "ref/netcoreapp3.0/System.IO.Compression.FileSystem.dll",
-        "ref/netcoreapp3.0/System.IO.Compression.ZipFile.dll",
-        "ref/netcoreapp3.0/System.IO.Compression.ZipFile.xml",
-        "ref/netcoreapp3.0/System.IO.Compression.dll",
-        "ref/netcoreapp3.0/System.IO.Compression.xml",
-        "ref/netcoreapp3.0/System.IO.FileSystem.DriveInfo.dll",
-        "ref/netcoreapp3.0/System.IO.FileSystem.DriveInfo.xml",
-        "ref/netcoreapp3.0/System.IO.FileSystem.Primitives.dll",
-        "ref/netcoreapp3.0/System.IO.FileSystem.Watcher.dll",
-        "ref/netcoreapp3.0/System.IO.FileSystem.Watcher.xml",
-        "ref/netcoreapp3.0/System.IO.FileSystem.dll",
-        "ref/netcoreapp3.0/System.IO.FileSystem.xml",
-        "ref/netcoreapp3.0/System.IO.IsolatedStorage.dll",
-        "ref/netcoreapp3.0/System.IO.IsolatedStorage.xml",
-        "ref/netcoreapp3.0/System.IO.MemoryMappedFiles.dll",
-        "ref/netcoreapp3.0/System.IO.MemoryMappedFiles.xml",
-        "ref/netcoreapp3.0/System.IO.Pipes.dll",
-        "ref/netcoreapp3.0/System.IO.Pipes.xml",
-        "ref/netcoreapp3.0/System.IO.UnmanagedMemoryStream.dll",
-        "ref/netcoreapp3.0/System.IO.dll",
-        "ref/netcoreapp3.0/System.Linq.Expressions.dll",
-        "ref/netcoreapp3.0/System.Linq.Expressions.xml",
-        "ref/netcoreapp3.0/System.Linq.Parallel.dll",
-        "ref/netcoreapp3.0/System.Linq.Parallel.xml",
-        "ref/netcoreapp3.0/System.Linq.Queryable.dll",
-        "ref/netcoreapp3.0/System.Linq.Queryable.xml",
-        "ref/netcoreapp3.0/System.Linq.dll",
-        "ref/netcoreapp3.0/System.Linq.xml",
-        "ref/netcoreapp3.0/System.Memory.dll",
-        "ref/netcoreapp3.0/System.Memory.xml",
-        "ref/netcoreapp3.0/System.Net.Http.dll",
-        "ref/netcoreapp3.0/System.Net.Http.xml",
-        "ref/netcoreapp3.0/System.Net.HttpListener.dll",
-        "ref/netcoreapp3.0/System.Net.HttpListener.xml",
-        "ref/netcoreapp3.0/System.Net.Mail.dll",
-        "ref/netcoreapp3.0/System.Net.Mail.xml",
-        "ref/netcoreapp3.0/System.Net.NameResolution.dll",
-        "ref/netcoreapp3.0/System.Net.NameResolution.xml",
-        "ref/netcoreapp3.0/System.Net.NetworkInformation.dll",
-        "ref/netcoreapp3.0/System.Net.NetworkInformation.xml",
-        "ref/netcoreapp3.0/System.Net.Ping.dll",
-        "ref/netcoreapp3.0/System.Net.Ping.xml",
-        "ref/netcoreapp3.0/System.Net.Primitives.dll",
-        "ref/netcoreapp3.0/System.Net.Primitives.xml",
-        "ref/netcoreapp3.0/System.Net.Requests.dll",
-        "ref/netcoreapp3.0/System.Net.Requests.xml",
-        "ref/netcoreapp3.0/System.Net.Security.dll",
-        "ref/netcoreapp3.0/System.Net.Security.xml",
-        "ref/netcoreapp3.0/System.Net.ServicePoint.dll",
-        "ref/netcoreapp3.0/System.Net.ServicePoint.xml",
-        "ref/netcoreapp3.0/System.Net.Sockets.dll",
-        "ref/netcoreapp3.0/System.Net.Sockets.xml",
-        "ref/netcoreapp3.0/System.Net.WebClient.dll",
-        "ref/netcoreapp3.0/System.Net.WebClient.xml",
-        "ref/netcoreapp3.0/System.Net.WebHeaderCollection.dll",
-        "ref/netcoreapp3.0/System.Net.WebHeaderCollection.xml",
-        "ref/netcoreapp3.0/System.Net.WebProxy.dll",
-        "ref/netcoreapp3.0/System.Net.WebProxy.xml",
-        "ref/netcoreapp3.0/System.Net.WebSockets.Client.dll",
-        "ref/netcoreapp3.0/System.Net.WebSockets.Client.xml",
-        "ref/netcoreapp3.0/System.Net.WebSockets.dll",
-        "ref/netcoreapp3.0/System.Net.WebSockets.xml",
-        "ref/netcoreapp3.0/System.Net.dll",
-        "ref/netcoreapp3.0/System.Numerics.Vectors.dll",
-        "ref/netcoreapp3.0/System.Numerics.Vectors.xml",
-        "ref/netcoreapp3.0/System.Numerics.dll",
-        "ref/netcoreapp3.0/System.ObjectModel.dll",
-        "ref/netcoreapp3.0/System.ObjectModel.xml",
-        "ref/netcoreapp3.0/System.Reflection.DispatchProxy.dll",
-        "ref/netcoreapp3.0/System.Reflection.DispatchProxy.xml",
-        "ref/netcoreapp3.0/System.Reflection.Emit.ILGeneration.dll",
-        "ref/netcoreapp3.0/System.Reflection.Emit.ILGeneration.xml",
-        "ref/netcoreapp3.0/System.Reflection.Emit.Lightweight.dll",
-        "ref/netcoreapp3.0/System.Reflection.Emit.Lightweight.xml",
-        "ref/netcoreapp3.0/System.Reflection.Emit.dll",
-        "ref/netcoreapp3.0/System.Reflection.Emit.xml",
-        "ref/netcoreapp3.0/System.Reflection.Extensions.dll",
-        "ref/netcoreapp3.0/System.Reflection.Metadata.dll",
-        "ref/netcoreapp3.0/System.Reflection.Metadata.xml",
-        "ref/netcoreapp3.0/System.Reflection.Primitives.dll",
-        "ref/netcoreapp3.0/System.Reflection.Primitives.xml",
-        "ref/netcoreapp3.0/System.Reflection.TypeExtensions.dll",
-        "ref/netcoreapp3.0/System.Reflection.TypeExtensions.xml",
-        "ref/netcoreapp3.0/System.Reflection.dll",
-        "ref/netcoreapp3.0/System.Resources.Reader.dll",
-        "ref/netcoreapp3.0/System.Resources.ResourceManager.dll",
-        "ref/netcoreapp3.0/System.Resources.ResourceManager.xml",
-        "ref/netcoreapp3.0/System.Resources.Writer.dll",
-        "ref/netcoreapp3.0/System.Resources.Writer.xml",
-        "ref/netcoreapp3.0/System.Runtime.CompilerServices.VisualC.dll",
-        "ref/netcoreapp3.0/System.Runtime.CompilerServices.VisualC.xml",
-        "ref/netcoreapp3.0/System.Runtime.Extensions.dll",
-        "ref/netcoreapp3.0/System.Runtime.Extensions.xml",
-        "ref/netcoreapp3.0/System.Runtime.Handles.dll",
-        "ref/netcoreapp3.0/System.Runtime.InteropServices.RuntimeInformation.dll",
-        "ref/netcoreapp3.0/System.Runtime.InteropServices.RuntimeInformation.xml",
-        "ref/netcoreapp3.0/System.Runtime.InteropServices.WindowsRuntime.dll",
-        "ref/netcoreapp3.0/System.Runtime.InteropServices.WindowsRuntime.xml",
-        "ref/netcoreapp3.0/System.Runtime.InteropServices.dll",
-        "ref/netcoreapp3.0/System.Runtime.InteropServices.xml",
-        "ref/netcoreapp3.0/System.Runtime.Intrinsics.dll",
-        "ref/netcoreapp3.0/System.Runtime.Loader.dll",
-        "ref/netcoreapp3.0/System.Runtime.Loader.xml",
-        "ref/netcoreapp3.0/System.Runtime.Numerics.dll",
-        "ref/netcoreapp3.0/System.Runtime.Numerics.xml",
-        "ref/netcoreapp3.0/System.Runtime.Serialization.Formatters.dll",
-        "ref/netcoreapp3.0/System.Runtime.Serialization.Formatters.xml",
-        "ref/netcoreapp3.0/System.Runtime.Serialization.Json.dll",
-        "ref/netcoreapp3.0/System.Runtime.Serialization.Json.xml",
-        "ref/netcoreapp3.0/System.Runtime.Serialization.Primitives.dll",
-        "ref/netcoreapp3.0/System.Runtime.Serialization.Primitives.xml",
-        "ref/netcoreapp3.0/System.Runtime.Serialization.Xml.dll",
-        "ref/netcoreapp3.0/System.Runtime.Serialization.Xml.xml",
-        "ref/netcoreapp3.0/System.Runtime.Serialization.dll",
-        "ref/netcoreapp3.0/System.Runtime.dll",
-        "ref/netcoreapp3.0/System.Runtime.xml",
-        "ref/netcoreapp3.0/System.Security.Claims.dll",
-        "ref/netcoreapp3.0/System.Security.Claims.xml",
-        "ref/netcoreapp3.0/System.Security.Cryptography.Algorithms.dll",
-        "ref/netcoreapp3.0/System.Security.Cryptography.Algorithms.xml",
-        "ref/netcoreapp3.0/System.Security.Cryptography.Csp.dll",
-        "ref/netcoreapp3.0/System.Security.Cryptography.Csp.xml",
-        "ref/netcoreapp3.0/System.Security.Cryptography.Encoding.dll",
-        "ref/netcoreapp3.0/System.Security.Cryptography.Encoding.xml",
-        "ref/netcoreapp3.0/System.Security.Cryptography.Primitives.dll",
-        "ref/netcoreapp3.0/System.Security.Cryptography.Primitives.xml",
-        "ref/netcoreapp3.0/System.Security.Cryptography.X509Certificates.dll",
-        "ref/netcoreapp3.0/System.Security.Cryptography.X509Certificates.xml",
-        "ref/netcoreapp3.0/System.Security.Principal.dll",
-        "ref/netcoreapp3.0/System.Security.Principal.xml",
-        "ref/netcoreapp3.0/System.Security.SecureString.dll",
-        "ref/netcoreapp3.0/System.Security.dll",
-        "ref/netcoreapp3.0/System.ServiceModel.Web.dll",
-        "ref/netcoreapp3.0/System.ServiceProcess.dll",
-        "ref/netcoreapp3.0/System.Text.Encoding.Extensions.dll",
-        "ref/netcoreapp3.0/System.Text.Encoding.Extensions.xml",
-        "ref/netcoreapp3.0/System.Text.Encoding.dll",
-        "ref/netcoreapp3.0/System.Text.Json.dll",
-        "ref/netcoreapp3.0/System.Text.Json.xml",
-        "ref/netcoreapp3.0/System.Text.RegularExpressions.dll",
-        "ref/netcoreapp3.0/System.Text.RegularExpressions.xml",
-        "ref/netcoreapp3.0/System.Threading.Overlapped.dll",
-        "ref/netcoreapp3.0/System.Threading.Overlapped.xml",
-        "ref/netcoreapp3.0/System.Threading.Tasks.Dataflow.dll",
-        "ref/netcoreapp3.0/System.Threading.Tasks.Dataflow.xml",
-        "ref/netcoreapp3.0/System.Threading.Tasks.Extensions.dll",
-        "ref/netcoreapp3.0/System.Threading.Tasks.Extensions.xml",
-        "ref/netcoreapp3.0/System.Threading.Tasks.Parallel.dll",
-        "ref/netcoreapp3.0/System.Threading.Tasks.Parallel.xml",
-        "ref/netcoreapp3.0/System.Threading.Tasks.dll",
-        "ref/netcoreapp3.0/System.Threading.Tasks.xml",
-        "ref/netcoreapp3.0/System.Threading.Thread.dll",
-        "ref/netcoreapp3.0/System.Threading.Thread.xml",
-        "ref/netcoreapp3.0/System.Threading.ThreadPool.dll",
-        "ref/netcoreapp3.0/System.Threading.ThreadPool.xml",
-        "ref/netcoreapp3.0/System.Threading.Timer.dll",
-        "ref/netcoreapp3.0/System.Threading.Timer.xml",
-        "ref/netcoreapp3.0/System.Threading.dll",
-        "ref/netcoreapp3.0/System.Threading.xml",
-        "ref/netcoreapp3.0/System.Transactions.Local.dll",
-        "ref/netcoreapp3.0/System.Transactions.Local.xml",
-        "ref/netcoreapp3.0/System.Transactions.dll",
-        "ref/netcoreapp3.0/System.ValueTuple.dll",
-        "ref/netcoreapp3.0/System.Web.HttpUtility.dll",
-        "ref/netcoreapp3.0/System.Web.HttpUtility.xml",
-        "ref/netcoreapp3.0/System.Web.dll",
-        "ref/netcoreapp3.0/System.Windows.dll",
-        "ref/netcoreapp3.0/System.Xml.Linq.dll",
-        "ref/netcoreapp3.0/System.Xml.ReaderWriter.dll",
-        "ref/netcoreapp3.0/System.Xml.ReaderWriter.xml",
-        "ref/netcoreapp3.0/System.Xml.Serialization.dll",
-        "ref/netcoreapp3.0/System.Xml.XDocument.dll",
-        "ref/netcoreapp3.0/System.Xml.XDocument.xml",
-        "ref/netcoreapp3.0/System.Xml.XPath.XDocument.dll",
-        "ref/netcoreapp3.0/System.Xml.XPath.XDocument.xml",
-        "ref/netcoreapp3.0/System.Xml.XPath.dll",
-        "ref/netcoreapp3.0/System.Xml.XPath.xml",
-        "ref/netcoreapp3.0/System.Xml.XmlDocument.dll",
-        "ref/netcoreapp3.0/System.Xml.XmlSerializer.dll",
-        "ref/netcoreapp3.0/System.Xml.XmlSerializer.xml",
-        "ref/netcoreapp3.0/System.Xml.dll",
-        "ref/netcoreapp3.0/System.dll",
-        "ref/netcoreapp3.0/WindowsBase.dll",
-        "ref/netcoreapp3.0/mscorlib.dll",
-        "ref/netcoreapp3.0/netstandard.dll",
-        "runtime.json"
-      ]
-    },
-    "Microsoft.NETCore.DotNetAppHost/3.0.0-preview-27324-5": {
-      "sha512": "v4Ig5sYtgxA9bY6hKdn5IvKxVb51oMJLVD/mYGX6yno5hDLaaMHXCm6m9Vu2Pf49pNTAzCUUC2ndP2rFWXBCMA==",
-      "type": "package",
-      "path": "microsoft.netcore.dotnetapphost/3.0.0-preview-27324-5",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "LICENSE.TXT",
-        "THIRD-PARTY-NOTICES.TXT",
-        "microsoft.netcore.dotnetapphost.3.0.0-preview-27324-5.nupkg.sha512",
-        "microsoft.netcore.dotnetapphost.nuspec",
-        "runtime.json"
-      ]
-    },
-    "Microsoft.NETCore.DotNetHostPolicy/3.0.0-preview-27324-5": {
-      "sha512": "5YwNQLG5lD3F9TEOKJesFGIcMOsrTrcBv4xtA2gnjZVwYBG68y5hXSGhRhhGnY71G0pewvOGqHt088BCA163tw==",
-      "type": "package",
-      "path": "microsoft.netcore.dotnethostpolicy/3.0.0-preview-27324-5",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "LICENSE.TXT",
-        "THIRD-PARTY-NOTICES.TXT",
-        "microsoft.netcore.dotnethostpolicy.3.0.0-preview-27324-5.nupkg.sha512",
-        "microsoft.netcore.dotnethostpolicy.nuspec",
-        "runtime.json"
-      ]
-    },
-    "Microsoft.NETCore.DotNetHostResolver/3.0.0-preview-27324-5": {
-      "sha512": "flhgos+RuN+tUru0dSgN5lQTFsU5n8P7L4jD7BiwhqAofF7LMBE7L4jFJPKQxzO6vhCblD3I8HoPs/NvEGHS3w==",
-      "type": "package",
-      "path": "microsoft.netcore.dotnethostresolver/3.0.0-preview-27324-5",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "LICENSE.TXT",
-        "THIRD-PARTY-NOTICES.TXT",
-        "microsoft.netcore.dotnethostresolver.3.0.0-preview-27324-5.nupkg.sha512",
-        "microsoft.netcore.dotnethostresolver.nuspec",
-        "runtime.json"
-      ]
-    },
-    "Microsoft.NETCore.Platforms/3.0.0-preview.19073.11": {
-      "sha512": "9lLkGd9xOH8kmV1p/evihvUzJxl8r0L5pPJvk4Dq/LmMjaSyeCl3kRFoqtw7/kekSlgXIPb4WO5AQR+wEwzeqA==",
-      "type": "package",
-      "path": "microsoft.netcore.platforms/3.0.0-preview.19073.11",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "LICENSE.TXT",
-        "THIRD-PARTY-NOTICES.TXT",
+        "ThirdPartyNotices.txt",
+        "dotnet_library_license.txt",
         "lib/netstandard1.0/_._",
-        "microsoft.netcore.platforms.3.0.0-preview.19073.11.nupkg.sha512",
+        "microsoft.netcore.platforms.1.1.0.nupkg.sha512",
         "microsoft.netcore.platforms.nuspec",
-        "runtime.json",
-        "useSharedDesignerContext.txt",
-        "version.txt"
+        "runtime.json"
       ]
     },
-    "Microsoft.NETCore.Targets/2.0.0": {
-      "sha512": "odP/tJj1z6GylFpNo7pMtbd/xQgTC3Ex2If63dRTL38bBNMwsBnJ+RceUIyHdRBC0oik/3NehYT+oECwBhIM3Q==",
+    "Microsoft.NETCore.Targets/1.1.0": {
+      "sha512": "aOZA3BWfz9RXjpzt0sRJJMjAscAUm3Hoa4UWAfceV9UTYxgwZ1lZt5nO2myFf+/jetYQo4uTP7zS8sJY67BBxg==",
       "type": "package",
-      "path": "microsoft.netcore.targets/2.0.0",
+      "path": "microsoft.netcore.targets/1.1.0",
       "files": [
         ".nupkg.metadata",
-        ".signature.p7s",
-        "LICENSE.TXT",
-        "THIRD-PARTY-NOTICES.TXT",
+        "ThirdPartyNotices.txt",
+        "dotnet_library_license.txt",
         "lib/netstandard1.0/_._",
-        "microsoft.netcore.targets.2.0.0.nupkg.sha512",
+        "microsoft.netcore.targets.1.1.0.nupkg.sha512",
         "microsoft.netcore.targets.nuspec",
-        "runtime.json",
-        "useSharedDesignerContext.txt",
-        "version.txt"
+        "runtime.json"
       ]
     },
     "NETStandard.Library/2.0.3": {
@@ -659,21 +291,6 @@
         "lib/netstandard1.0/_._",
         "netstandard.library.2.0.3.nupkg.sha512",
         "netstandard.library.nuspec"
-      ]
-    },
-    "runtime.win-x64.Microsoft.NETCore.DotNetAppHost/3.0.0-preview-27324-5": {
-      "sha512": "bbNyZdnpIuw+C8Rvwn5VauRExwyiegPhQDwyQy40L7bdeIVrCW9tCzSxK6HHjuhWx8F5d+UCgTkCI2JEIYU66Q==",
-      "type": "package",
-      "path": "runtime.win-x64.microsoft.netcore.dotnetapphost/3.0.0-preview-27324-5",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "LICENSE.TXT",
-        "THIRD-PARTY-NOTICES.TXT",
-        "runtime.win-x64.microsoft.netcore.dotnetapphost.3.0.0-preview-27324-5.nupkg.sha512",
-        "runtime.win-x64.microsoft.netcore.dotnetapphost.nuspec",
-        "runtimes/win-x64/native/apphost.exe",
-        "version.txt"
       ]
     },
     "System.IO/4.3.0": {
@@ -1204,19 +821,12 @@
         "system.threading.tasks.4.3.0.nupkg.sha512",
         "system.threading.tasks.nuspec"
       ]
-    },
-    "EntityMappingDBEmit/1.0.0": {
-      "type": "project",
-      "path": "../EntityMappingDB/EntityMappingDBEmit.csproj",
-      "msbuildProject": "../EntityMappingDB/EntityMappingDBEmit.csproj"
     }
   },
   "projectFileDependencyGroups": {
-    ".NETCoreApp,Version=v3.0": [
-      "EntityMappingDBEmit >= 1.0.0",
-      "Microsoft.NETCore.App >= 3.0.0-preview-27324-5",
-      "Microsoft.NETCore.Platforms >= 3.0.0-preview.19073.11",
-      "runtime.win-x64.Microsoft.NETCore.DotNetAppHost >= 3.0.0-preview-27324-5"
+    ".NETStandard,Version=v2.0": [
+      "NETStandard.Library >= 2.0.3",
+      "System.Reflection.Emit.Lightweight >= 4.3.0"
     ]
   },
   "packageFolders": {
@@ -1226,11 +836,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Study\\vs\\Test\\EntityMappingDBEmit\\EntityMappingDBEmit\\ConsoleApp1\\ConsoleApp1.csproj",
-      "projectName": "ConsoleApp1",
-      "projectPath": "E:\\Study\\vs\\Test\\EntityMappingDBEmit\\EntityMappingDBEmit\\ConsoleApp1\\ConsoleApp1.csproj",
+      "projectUniqueName": "E:\\Study\\vs\\Test\\EntityMappingDBEmit\\EntityMappingDBEmit\\EntityMappingDB\\EntityMappingDBEmit.csproj",
+      "projectName": "EntityMappingDBEmit",
+      "projectPath": "E:\\Study\\vs\\Test\\EntityMappingDBEmit\\EntityMappingDBEmit\\EntityMappingDB\\EntityMappingDBEmit.csproj",
       "packagesPath": "C:\\Users\\jinyu\\.nuget\\packages\\",
-      "outputPath": "E:\\Study\\vs\\Test\\EntityMappingDBEmit\\EntityMappingDBEmit\\ConsoleApp1\\obj\\",
+      "outputPath": "E:\\Study\\vs\\Test\\EntityMappingDBEmit\\EntityMappingDBEmit\\EntityMappingDB\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -1241,7 +851,7 @@
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
-        "netcoreapp3.0"
+        "netstandard2.0"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -1252,12 +862,8 @@
         "https://dotnetfeed.blob.core.windows.net/dotnet-windowsdesktop/index.json": {}
       },
       "frameworks": {
-        "netcoreapp3.0": {
-          "projectReferences": {
-            "E:\\Study\\vs\\Test\\EntityMappingDBEmit\\EntityMappingDBEmit\\EntityMappingDB\\EntityMappingDBEmit.csproj": {
-              "projectPath": "E:\\Study\\vs\\Test\\EntityMappingDBEmit\\EntityMappingDBEmit\\EntityMappingDB\\EntityMappingDBEmit.csproj"
-            }
-          }
+        "netstandard2.0": {
+          "projectReferences": {}
         }
       },
       "warningProperties": {
@@ -1267,26 +873,17 @@
       }
     },
     "frameworks": {
-      "netcoreapp3.0": {
+      "netstandard2.0": {
         "dependencies": {
-          "Microsoft.NETCore.App": {
-            "include": "None",
+          "NETStandard.Library": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "[3.0.0-preview-27324-5, )",
+            "version": "[2.0.3, )",
             "autoReferenced": true
           },
-          "Microsoft.NETCore.Platforms": {
+          "System.Reflection.Emit.Lightweight": {
             "target": "Package",
-            "version": "[3.0.0-preview.19073.11, )",
-            "autoReferenced": true
-          },
-          "runtime.win-x64.Microsoft.NETCore.DotNetAppHost": {
-            "include": "None",
-            "suppressParent": "All",
-            "target": "Package",
-            "version": "[3.0.0-preview-27324-5, )",
-            "autoReferenced": true
+            "version": "[4.3.0, )"
           }
         },
         "imports": [

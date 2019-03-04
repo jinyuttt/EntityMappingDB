@@ -1,11 +1,10 @@
 ﻿using EntityMappingDBEmit;
-using EntityMappingDBEmit.DBToEntity;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
 
-namespace ConsoleApp1
+namespace ConsoleApp2
 {
     class Program
     {
@@ -64,7 +63,7 @@ namespace ConsoleApp1
                 watch.Stop();
                 Console.WriteLine(lst.Count + "," + watch.ElapsedMilliseconds);
             }
-          
+
         }
     }
 }

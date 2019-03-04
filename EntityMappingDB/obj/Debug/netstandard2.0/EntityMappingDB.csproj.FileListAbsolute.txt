@@ -1,0 +1,9 @@
+E:\Study\vs\Test\EntityMappingDBEmit\EntityMappingDBEmit\EntityMappingDB\bin\Debug\netstandard2.0\EntityMappingDB.deps.json
+E:\Study\vs\Test\EntityMappingDBEmit\EntityMappingDBEmit\EntityMappingDB\bin\Debug\netstandard2.0\EntityMappingDB.dll
+E:\Study\vs\Test\EntityMappingDBEmit\EntityMappingDBEmit\EntityMappingDB\bin\Debug\netstandard2.0\EntityMappingDB.pdb
+E:\Study\vs\Test\EntityMappingDBEmit\EntityMappingDBEmit\EntityMappingDB\obj\Debug\netstandard2.0\EntityMappingDB.csprojAssemblyReference.cache
+E:\Study\vs\Test\EntityMappingDBEmit\EntityMappingDBEmit\EntityMappingDB\obj\Debug\netstandard2.0\EntityMappingDB.csproj.CoreCompileInputs.cache
+E:\Study\vs\Test\EntityMappingDBEmit\EntityMappingDBEmit\EntityMappingDB\obj\Debug\netstandard2.0\EntityMappingDB.AssemblyInfoInputs.cache
+E:\Study\vs\Test\EntityMappingDBEmit\EntityMappingDBEmit\EntityMappingDB\obj\Debug\netstandard2.0\EntityMappingDB.AssemblyInfo.cs
+E:\Study\vs\Test\EntityMappingDBEmit\EntityMappingDBEmit\EntityMappingDB\obj\Debug\netstandard2.0\EntityMappingDB.dll
+E:\Study\vs\Test\EntityMappingDBEmit\EntityMappingDBEmit\EntityMappingDB\obj\Debug\netstandard2.0\EntityMappingDB.pdb

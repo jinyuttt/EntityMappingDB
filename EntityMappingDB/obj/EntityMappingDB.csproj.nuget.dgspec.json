@@ -1,24 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Study\\vs\\Test\\EntityMappingDBEmit\\EntityMappingDBEmit\\EntityMappingDB\\EntityMappingDB.csproj": {}
+    "E:\\study\\DBMap\\EntityMappingDBEmit\\EntityMappingDB\\EntityMappingDB.csproj": {}
   },
   "projects": {
-    "E:\\Study\\vs\\Test\\EntityMappingDBEmit\\EntityMappingDBEmit\\EntityMappingDB\\EntityMappingDB.csproj": {
-      "version": "1.0.0",
+    "E:\\study\\DBMap\\EntityMappingDBEmit\\EntityMappingDB\\EntityMappingDB.csproj": {
+      "version": "1.1.0",
       "restore": {
-        "projectUniqueName": "E:\\Study\\vs\\Test\\EntityMappingDBEmit\\EntityMappingDBEmit\\EntityMappingDB\\EntityMappingDB.csproj",
+        "projectUniqueName": "E:\\study\\DBMap\\EntityMappingDBEmit\\EntityMappingDB\\EntityMappingDB.csproj",
         "projectName": "EntityMappingDB",
-        "projectPath": "E:\\Study\\vs\\Test\\EntityMappingDBEmit\\EntityMappingDBEmit\\EntityMappingDB\\EntityMappingDB.csproj",
+        "projectPath": "E:\\study\\DBMap\\EntityMappingDBEmit\\EntityMappingDB\\EntityMappingDB.csproj",
         "packagesPath": "C:\\Users\\jinyu\\.nuget\\packages\\",
-        "outputPath": "E:\\Study\\vs\\Test\\EntityMappingDBEmit\\EntityMappingDBEmit\\EntityMappingDB\\obj\\",
+        "outputPath": "E:\\study\\DBMap\\EntityMappingDBEmit\\EntityMappingDB\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
           "C:\\Users\\jinyu\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 18.1.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,11 +25,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "d:\\Program Files\\DevExpress 18.1\\Components\\System\\Components\\Packages": {},
-          "https://api.nuget.org/v3/index.json": {},
-          "https://dotnet.myget.org/F/aspnetcore-dev/api/v3/index.json": {},
-          "https://dotnetfeed.blob.core.windows.net/dotnet-core/index.json": {},
-          "https://dotnetfeed.blob.core.windows.net/dotnet-windowsdesktop/index.json": {}
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netstandard2.0": {

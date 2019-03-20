@@ -836,9 +836,9 @@
   "project": {
     "version": "1.1.0",
     "restore": {
-      "projectUniqueName": "E:\\study\\DBMap\\EntityMappingDBEmit\\EntityMappingDB\\EntityMappingDBEmit.csproj",
-      "projectName": "EntityMappingDBEmit",
-      "projectPath": "E:\\study\\DBMap\\EntityMappingDBEmit\\EntityMappingDB\\EntityMappingDBEmit.csproj",
+      "projectUniqueName": "E:\\study\\DBMap\\EntityMappingDBEmit\\EntityMappingDB\\EntityMappingDB.csproj",
+      "projectName": "EntityMappingDB",
+      "projectPath": "E:\\study\\DBMap\\EntityMappingDBEmit\\EntityMappingDB\\EntityMappingDB.csproj",
       "packagesPath": "C:\\Users\\jinyu\\.nuget\\packages\\",
       "outputPath": "E:\\study\\DBMap\\EntityMappingDBEmit\\EntityMappingDB\\obj\\",
       "projectStyle": "PackageReference",

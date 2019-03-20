@@ -1,10 +1,10 @@
 ﻿#region << 版 本 注 释 >>
 /*----------------------------------------------------------------
-* 项目名称 ：EntityMappingDBEmit.DBToEntity
+* 项目名称 ：EntityMappingDB.DBToEntity
 * 项目描述 ：
 * 类 名 称 ：AssembleInfo
 * 类 描 述 ：
-* 命名空间 ：EntityMappingDBEmit.DBToEntity
+* 命名空间 ：EntityMappingDB.DBToEntity
 * CLR 版本 ：4.0.30319.42000
 * 作    者 ：jinyu
 * 创建时间 ：2019
@@ -18,12 +18,10 @@
 
 
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Reflection;
 using System.Data;
 
-namespace EntityMappingDBEmit.DBToEntity
+namespace EntityMappingDB.DBToEntity
 {
     /* ============================================================================== 
 * 功能描述：AssembleInfo  emit所需要的元数据信息

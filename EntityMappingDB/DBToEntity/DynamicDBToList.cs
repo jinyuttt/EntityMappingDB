@@ -1,10 +1,10 @@
 ﻿#region << 版 本 注 释 >>
 /*----------------------------------------------------------------
-* 项目名称 ：EntityMappingDBEmit.DBToEntity
+* 项目名称 ：EntityMappingDB.DBToEntity
 * 项目描述 ：
-* 类 名 称 ：DynamicEntityMappingDBEmit.DBToEntity
+* 类 名 称 ：DynamicEntityMappingDB.DBToEntity
 * 类 描 述 ：
-* 命名空间 ：EntityMappingDBEmit.DBToEntity
+* 命名空间 ：EntityMappingDB.DBToEntity
 * CLR 版本 ：4.0.30319.42000
 * 作    者 ：jinyu
 * 创建时间 ：2019
@@ -17,15 +17,15 @@
 
 
 
-using EntityMappingDBEmit.CacheBuffers;
-using EntityMappingDBEmit.DBToEntity;
+using EntityMappingDB.CacheBuffers;
+using EntityMappingDB.DBToEntity;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Reflection;
 using System.Reflection.Emit;
 
-namespace EntityMappingDBEmit
+namespace EntityMappingDB
 {
     /* ============================================================================== 
 * 功能描述：EntityConverter Emit转换实体
@@ -34,7 +34,7 @@ namespace EntityMappingDBEmit
 * 更新时间 ：2019
 * ==============================================================================*/
 
-    public  static partial class DynamicEntityMappingDBEmit
+    public  static partial class DynamicEntityMappingDB
     {
         public static bool IsCache = true;
 

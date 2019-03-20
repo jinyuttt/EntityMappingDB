@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EntityMappingDBEmit
+namespace EntityMappingDB
 {
 
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]

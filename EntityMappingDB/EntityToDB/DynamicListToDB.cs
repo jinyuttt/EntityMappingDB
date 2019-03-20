@@ -3,14 +3,15 @@ using System.Collections.Generic;
 using System.Data;
 using System.Reflection.Emit;
 using System.Reflection;
-namespace EntityMappingDBEmit
+
+namespace EntityMappingDB
 {
    
 
     /// <summary>
     /// List转DataTable扩展
     /// </summary>
-    public static partial class DynamicEntityMappingDBEmit
+    public static partial class DynamicEntityMappingDB
     {
         public delegate void EntityDataTable<T>(DataTable dr, T obj);
         public delegate void EntityDataRow<T>(DataRow row, T obj);

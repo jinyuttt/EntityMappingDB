@@ -137,7 +137,7 @@
   },
   "libraries": {
     "Microsoft.NETCore.Platforms/1.1.0": {
-      "sha512": "bLpT1f/SFlO1CzqXG12KnJzpZs6lv24uX2Rzi4Fmm0noJpNlnWRVryuO3yK18Ca04t/YHcO1e1Z0WDfjseqNzw==",
+      "sha512": "kz0PEW2lhqygehI/d6XsPCQzD7ff7gUJaVGPVETX611eadGsA3A877GdSlU0LRVMCTH/+P3o2iDTak+S08V2+A==",
       "type": "package",
       "path": "microsoft.netcore.platforms/1.1.0",
       "files": [
@@ -836,18 +836,17 @@
   "project": {
     "version": "1.1.0",
     "restore": {
-      "projectUniqueName": "E:\\Study\\vs\\Test\\EntityMappingDBEmit\\EntityMappingDBEmit\\EntityMappingDB\\EntityMappingDBEmit.csproj",
+      "projectUniqueName": "E:\\study\\DBMap\\EntityMappingDBEmit\\EntityMappingDB\\EntityMappingDBEmit.csproj",
       "projectName": "EntityMappingDBEmit",
-      "projectPath": "E:\\Study\\vs\\Test\\EntityMappingDBEmit\\EntityMappingDBEmit\\EntityMappingDB\\EntityMappingDBEmit.csproj",
+      "projectPath": "E:\\study\\DBMap\\EntityMappingDBEmit\\EntityMappingDB\\EntityMappingDBEmit.csproj",
       "packagesPath": "C:\\Users\\jinyu\\.nuget\\packages\\",
-      "outputPath": "E:\\Study\\vs\\Test\\EntityMappingDBEmit\\EntityMappingDBEmit\\EntityMappingDB\\obj\\",
+      "outputPath": "E:\\study\\DBMap\\EntityMappingDBEmit\\EntityMappingDB\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
         "C:\\Users\\jinyu\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 18.1.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -855,11 +854,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "d:\\Program Files\\DevExpress 18.1\\Components\\System\\Components\\Packages": {},
-        "https://api.nuget.org/v3/index.json": {},
-        "https://dotnet.myget.org/F/aspnetcore-dev/api/v3/index.json": {},
-        "https://dotnetfeed.blob.core.windows.net/dotnet-core/index.json": {},
-        "https://dotnetfeed.blob.core.windows.net/dotnet-windowsdesktop/index.json": {}
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netstandard2.0": {

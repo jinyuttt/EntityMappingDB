@@ -10,7 +10,7 @@ ToEntityList扩展方法
 FromEntityToTable扩展方法
 
 如果实体转换DataTable带有特性：
-FromEntityToTableMap扩展方法
+FromEntityToTableAttribute扩展方法
 
 我设计了三类特性ColumnType（列类型映射）,DataField(列名称映射），NoColumn（没有对应的列，忽略该属性）  
 

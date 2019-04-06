@@ -40,7 +40,7 @@ namespace EntityMappingDB
 
       
         //数据类型和对应的强制转换方法的methodinfo，供实体属性赋值时调用
-        private static Dictionary<Type, MethodInfo> ConvertMethods = new Dictionary<Type, MethodInfo>()
+        private static readonly Dictionary<Type, MethodInfo> ConvertMethods = new Dictionary<Type, MethodInfo>()
        {
            {typeof(int),typeof(Convert).GetMethod("ToInt32",new Type[]{typeof(object)})},
            {typeof(Int16),typeof(Convert).GetMethod("ToInt16",new Type[]{typeof(object)})},
@@ -50,17 +50,12 @@ namespace EntityMappingDB
            {typeof(Double),typeof(Convert).GetMethod("ToDouble",new Type[]{typeof(object)})},
            {typeof(Boolean),typeof(Convert).GetMethod("ToBoolean",new Type[]{typeof(object)})},
            {typeof(string),typeof(Convert).GetMethod("ToString",new Type[]{typeof(object)})}
-
-          
-
        };
 
         //把datarow转换为实体的方法的委托定义
         public delegate T LoadDataRow<T>(DataRow dr);
         //把datareader转换为实体的方法的委托定义
         public delegate T LoadDataRecord<T>(IDataRecord dr);
-
-       
 
         //emit里面用到的针对datarow的元数据信息
         private static readonly DynamicAssembleInfo dataRowAssembly = new DynamicAssembleInfo(typeof(DataRow));
@@ -101,7 +96,6 @@ namespace EntityMappingDB
                 generator.Emit(OpCodes.Call, assembly.GetValueMethod);//获取数据库值
                 if (property.PropertyType.IsValueType || property.PropertyType == typeof(string))
                 {
-                     
                     var cur = Nullable.GetUnderlyingType(property.PropertyType);
                     generator.Emit(OpCodes.Call, ConvertMethods[cur==null?property.PropertyType:cur]);//调用强转方法赋值
                     if (cur!=null)
@@ -124,7 +118,7 @@ namespace EntityMappingDB
         }
 
         /// <summary>
-        /// 检查列;获取DataTable有列的属性集合
+        /// 检查列,获取DataTable有列的属性集合
         /// </summary>
         /// <param name="dt">DataTable</param>
         /// <param name="Properties">属性集合</param>
@@ -187,23 +181,23 @@ namespace EntityMappingDB
             return lst.ToArray();
         }
 
-       
-       /// <summary>
-       /// 查找DataRow转换
-       /// </summary>
-       /// <typeparam name="T"></typeparam>
-       /// <returns></returns>
+
+        /// <summary>
+        /// 查找DataRow转换
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <returns></returns>
         private static LoadDataRow<T> FindDataRowMethod<T>(DataTable dt)
         {
             string key = dt.TableName;
             if (string.IsNullOrEmpty(key))
             {
                 key = dt.Columns.Count + "_";
-                foreach(DataColumn col in dt.Columns)
+                foreach (DataColumn col in dt.Columns)
                 {
                     key = key + col.ColumnName + "_";
                 }
-               key=key+ dataRowAssembly.MethodName + typeof(T).FullName;
+                key = key + dataRowAssembly.MethodName + typeof(T).FullName;
             }
             LoadDataRow<T> load = null;
             object v = null;
@@ -229,6 +223,7 @@ namespace EntityMappingDB
                 key=dt.TableName;
                 if (string.IsNullOrEmpty(key))
                 {
+                    //如果DataTable名称没有，则按照所有列名称定Key
                     key = dt.Columns.Count + "_";
                     foreach (DataColumn col in dt.Columns)
                     {
@@ -253,15 +248,12 @@ namespace EntityMappingDB
         /// <returns></returns>
         private static LoadDataRecord<T> FindDataRecordMethod<T>(IDataReader reader)
         {
-            
-                string key = "";
-                key = reader.FieldCount + "_";
-                for (int i =0;i< reader.FieldCount;i++)
-                {
-                    key = key + reader.GetName(i) + "_";
-                }
-                key = key + dataRecordAssembly.MethodName + typeof(T).FullName;
-            
+            string key = reader.FieldCount + "_";
+            for (int i = 0; i < reader.FieldCount; i++)
+            {
+                key = key + reader.GetName(i) + "_";
+            }
+            key = key + dataRecordAssembly.MethodName + typeof(T).FullName;
             LoadDataRecord<T> load = null;
             object v = null;
             if (ConvertCache<string, object>.Singleton.TryGet(key, out v))

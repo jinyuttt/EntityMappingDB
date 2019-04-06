@@ -1,8 +1,0 @@
-E:\study\DBMap\EntityMappingDBEmit\EntityMappingDB\bin\Debug\netstandard2.0\EntityMappingDBEmit.deps.json
-E:\study\DBMap\EntityMappingDBEmit\EntityMappingDB\bin\Debug\netstandard2.0\EntityMappingDBEmit.dll
-E:\study\DBMap\EntityMappingDBEmit\EntityMappingDB\bin\Debug\netstandard2.0\EntityMappingDBEmit.pdb
-E:\study\DBMap\EntityMappingDBEmit\EntityMappingDB\obj\Debug\netstandard2.0\EntityMappingDBEmit.csproj.CoreCompileInputs.cache
-E:\study\DBMap\EntityMappingDBEmit\EntityMappingDB\obj\Debug\netstandard2.0\EntityMappingDBEmit.AssemblyInfoInputs.cache
-E:\study\DBMap\EntityMappingDBEmit\EntityMappingDB\obj\Debug\netstandard2.0\EntityMappingDBEmit.AssemblyInfo.cs
-E:\study\DBMap\EntityMappingDBEmit\EntityMappingDB\obj\Debug\netstandard2.0\EntityMappingDBEmit.dll
-E:\study\DBMap\EntityMappingDBEmit\EntityMappingDB\obj\Debug\netstandard2.0\EntityMappingDBEmit.pdb

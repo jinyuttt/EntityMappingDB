@@ -17,6 +17,13 @@ FromEntityToTableAttribute扩展方法
 没有使用高级语法糖，应该.net 4.0及以上都可。
 已经是.net standard版本
 
+#升级
+2020-1-12  
+1.升级Emit微软官方库  
+2.增加底层转换，支持type对象传入  
+
+
+
 说明：
 不出意外，该项目没有升级的必要，除非emit技术有更新
 

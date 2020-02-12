@@ -117,6 +117,56 @@ namespace EntityMappingDB
             return method;
         }
 
+        private static DynamicMethod BuildMethod(DynamicAssembleInfo assembly, Type type, MapColumn[] mapColumns = null, string methodName = "")
+        {
+            if (methodName == null)
+            {
+                methodName = "";
+            }
+            DynamicMethod method = new DynamicMethod(methodName + assembly.MethodName + type.Name, MethodAttributes.Public | MethodAttributes.Static, CallingConventions.Standard, typeof(object),
+                    new Type[] { assembly.SourceType }, typeof(EntityContext).Module, true);
+            ILGenerator generator = method.GetILGenerator();
+            LocalBuilder result = generator.DeclareLocal(type);
+            generator.Emit(OpCodes.Newobj, type.GetConstructor(Type.EmptyTypes));
+            generator.Emit(OpCodes.Stloc, result);
+            foreach (var column in mapColumns)
+            {
+                PropertyInfo property = column.Property;
+                var endIfLabel = generator.DefineLabel();
+                generator.Emit(OpCodes.Ldarg_0);
+                //第一组，调用AssembleInfo的CanSetted方法，判断是否可以转换
+                generator.Emit(OpCodes.Ldstr, column.ColumnName);
+                generator.Emit(OpCodes.Call, assembly.CanSettedMethod);
+                generator.Emit(OpCodes.Brfalse, endIfLabel);
+                //第二组,属性设置
+                generator.Emit(OpCodes.Ldloc, result);
+                generator.Emit(OpCodes.Ldarg_0);
+                generator.Emit(OpCodes.Ldstr, column.ColumnName);
+                generator.Emit(OpCodes.Call, assembly.GetValueMethod);//获取数据库值
+                if (property.PropertyType.IsValueType || property.PropertyType == typeof(string))
+                {
+                    var cur = Nullable.GetUnderlyingType(property.PropertyType);
+                    generator.Emit(OpCodes.Call, ConvertMethods[cur == null ? property.PropertyType : cur]);//调用强转方法赋值
+                    if (cur != null)
+                    {
+                        generator.Emit(OpCodes.Newobj, property.PropertyType.GetConstructor(new Type[] { cur }));
+                    }
+                }
+                //效果类似  Name=Convert.ToString(row["PName"]);
+                else
+                {
+                    generator.Emit(OpCodes.Castclass, property.PropertyType);
+                }
+                generator.Emit(OpCodes.Call, property.GetSetMethod());//直接给属性赋值
+                //效果类似  Name=row["PName"];
+                generator.MarkLabel(endIfLabel);
+            }
+            generator.Emit(OpCodes.Ldloc, result);
+            generator.Emit(OpCodes.Ret);
+            return method;
+        }
+
+
         /// <summary>
         /// 检查列,获取DataTable有列的属性集合
         /// </summary>
@@ -208,6 +258,28 @@ namespace EntityMappingDB
             return load;
         }
 
+        private static LoadDataRow<object> FindObjectDataRowMethod(DataTable dt,Type type)
+        {
+            string key = dt.TableName;
+            if (string.IsNullOrEmpty(key))
+            {
+                key = dt.Columns.Count + "_";
+                foreach (DataColumn col in dt.Columns)
+                {
+                    key = key + col.ColumnName + "_";
+                }
+                key = key + dataRowAssembly.MethodName + type.FullName;
+            }
+            LoadDataRow<object> load = null;
+            object v = null;
+            if (ConvertCache<string, object>.Singleton.TryGet(key, out v))
+            {
+                load = v as LoadDataRow<object>;
+            }
+            return load;
+        }
+
+
         /// <summary>
         /// 创建DataRow转换
         /// </summary>
@@ -240,6 +312,32 @@ namespace EntityMappingDB
             return load;
         }
 
+        private static LoadDataRow<object> CreateDataRowMethod(DataTable dt, MapColumn[] mapColumns,Type type)
+        {
+            string key = null;
+            if (dt != null)
+            {
+                key = dt.TableName;
+                if (string.IsNullOrEmpty(key))
+                {
+                    //如果DataTable名称没有，则按照所有列名称定Key
+                    key = dt.Columns.Count + "_";
+                    foreach (DataColumn col in dt.Columns)
+                    {
+                        key = key + col.ColumnName + "_";
+                    }
+                    key = key + dataRowAssembly.MethodName + type.FullName;
+                }
+            }
+            LoadDataRow<object> load = (LoadDataRow<object>)BuildMethod(dataRowAssembly,type, mapColumns, key).CreateDelegate(typeof(LoadDataRow<object>));
+            if (key != null)
+            {
+                ConvertCache<string, object>.Singleton.Set(key, load);
+            }
+            return load;
+        }
+
+
         /// <summary>
         /// 查找DataRecord转换
         /// </summary>
@@ -263,6 +361,24 @@ namespace EntityMappingDB
             return load;
         }
 
+        private static LoadDataRecord<object> FindObjectDataRecordMethod(IDataReader reader,Type type)
+        {
+            string key = reader.FieldCount + "_";
+            for (int i = 0; i < reader.FieldCount; i++)
+            {
+                key = key + reader.GetName(i) + "_";
+            }
+            key = key + dataRecordAssembly.MethodName + type.FullName;
+            LoadDataRecord<object> load = null;
+            object v = null;
+            if (ConvertCache<string, object>.Singleton.TryGet(key, out v))
+            {
+                load = v as LoadDataRecord<object>;
+            }
+            return load;
+        }
+
+
         /// <summary>
         /// 创建DataRecord转换
         /// </summary>
@@ -283,6 +399,26 @@ namespace EntityMappingDB
                 key = key + dataRecordAssembly.MethodName + typeof(T).FullName;
             }
             LoadDataRecord<T> load = (LoadDataRecord<T>)BuildMethod<T>(dataRecordAssembly, mapColumns,key).CreateDelegate(typeof(LoadDataRecord<T>));
+            if (key != null)
+            {
+                ConvertCache<string, object>.Singleton.Set(key, load);
+            }
+            return load;
+        }
+
+        private static LoadDataRecord<object> CreateDataRecordMethod(IDataReader reader, MapColumn[] mapColumns,Type type)
+        {
+            string key = null;
+            if (reader != null)
+            {
+                key = reader.FieldCount + "_";
+                for (int i = 0; i < reader.FieldCount; i++)
+                {
+                    key = key + reader.GetName(i) + "_";
+                }
+                key = key + dataRecordAssembly.MethodName + type.FullName;
+            }
+            LoadDataRecord<object> load = (LoadDataRecord<object>)BuildMethod(dataRecordAssembly,type, mapColumns, key).CreateDelegate(typeof(LoadDataRecord<object>));
             if (key != null)
             {
                 ConvertCache<string, object>.Singleton.Set(key, load);
@@ -331,6 +467,39 @@ namespace EntityMappingDB
             return list;
         }
 
+        public static List<object> ToEntityList(this DataTable dt,Type type)
+        {
+            List<object> list = new List<object>();
+            if (dt == null || dt.Rows.Count == 0)
+            {
+                return list;
+            }
+            LoadDataRow<object> load = null;
+            if (IsCache)
+            {
+                load = FindObjectDataRowMethod(dt,type);
+            }
+
+            if (load == null)
+            {
+                var properties = type.GetProperties(BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
+                var mapColumns = CheckProperty(dt, properties);
+                if (IsCache)
+                {
+                    load = CreateDataRowMethod(dt, mapColumns,type);
+                }
+                else
+                {
+                    load = CreateDataRowMethod(null, mapColumns,type);
+                }
+            }
+            foreach (DataRow dr in dt.Rows)
+            {
+                list.Add(load(dr));
+            }
+            return list;
+        }
+
         /// <summary>
         /// emit转换实体
         /// </summary>
@@ -366,6 +535,37 @@ namespace EntityMappingDB
             }
             return list;
         }
+
+        public static List<object> ToEntityList(this IDataReader dr,Type type)
+        {
+            List<object> list = new List<object>();
+            LoadDataRecord<object> load = null;
+            if (IsCache)
+            {
+                load = FindObjectDataRecordMethod(dr,type);
+            }
+
+            if (load == null)
+            {
+                var properties = type.GetProperties(BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
+                var mapColumns = CheckProperty(dr, properties);
+                if (IsCache)
+                {
+                    load = CreateDataRecordMethod(dr, mapColumns,type);
+                }
+                else
+                {
+                    load = CreateDataRecordMethod(null, mapColumns,type);
+                }
+
+            }
+            while (dr.Read())
+            {
+                list.Add(load(dr));
+            }
+            return list;
+        }
+
 
     }
 }

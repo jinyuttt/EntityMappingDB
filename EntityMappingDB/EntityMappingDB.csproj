@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>1.1.1</Version>
+    <Version>1.2.1</Version>
     <Description>DB与实体转换，个人贡献</Description>
     <Copyright>2019</Copyright>
     <PackageLicenseUrl>https://github.com/jinyuttt/EntityMappingDBEmit/blob/master/LICENSE</PackageLicenseUrl>
@@ -12,7 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="System.Reflection.Emit.Lightweight" Version="4.3.0" />
+    <PackageReference Include="System.Reflection.Emit.Lightweight" Version="4.7.0" />
   </ItemGroup>
 
 </Project>

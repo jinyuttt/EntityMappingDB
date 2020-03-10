@@ -41,5 +41,10 @@ namespace EntityMappingDB.DBToEntity
        /// </summary>
        public string ColumnName { get; set; }
 
+       /// <summary>
+       /// 
+       /// </summary>
+        public string ColType { get; set; }
+
     }
 }

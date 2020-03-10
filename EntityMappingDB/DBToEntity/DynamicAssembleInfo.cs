@@ -36,6 +36,7 @@ namespace EntityMappingDB.DBToEntity
         public Type SourceType;
         public MethodInfo CanSettedMethod;
         public MethodInfo GetValueMethod;
+        public MethodInfo EnumConvert;
       
         public DynamicAssembleInfo(Type type)
         {
@@ -43,6 +44,7 @@ namespace EntityMappingDB.DBToEntity
             MethodName = "Convert" + type.Name + "To";
             CanSettedMethod = this.GetType().GetMethod("CanSetted", new Type[] { type, typeof(string) });
             GetValueMethod = type.GetMethod("get_Item", new Type[] { typeof(string) });
+            EnumConvert= this.GetType().GetMethod("ConvertEnum", new Type[] { typeof(object),typeof(Type)});
         }
 
        
@@ -70,5 +72,17 @@ namespace EntityMappingDB.DBToEntity
         {
             return !dr.IsNull(name);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        public static object ConvertEnum(object obj,Type type)
+        {
+           return Enum.Parse(type, obj.ToString());
+        }
+     
     }
 }

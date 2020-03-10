@@ -98,11 +98,28 @@ namespace EntityMappingDB
                 generator.Emit(OpCodes.Call, assembly.GetValueMethod);//获取数据库值
                 if (property.PropertyType.IsValueType || property.PropertyType == typeof(string))
                 {
-                    var cur = Nullable.GetUnderlyingType(property.PropertyType);
-                    generator.Emit(OpCodes.Call, ConvertMethods[cur==null?property.PropertyType:cur]);//调用强转方法赋值
-                    if (cur!=null)
+                    if (property.PropertyType.IsEnum)
                     {
-                        generator.Emit(OpCodes.Newobj, property.PropertyType.GetConstructor(new Type[] { cur}));
+                        if (column.ColType == "Int32")
+                        {
+                            generator.Emit(OpCodes.Unbox_Any, property.PropertyType);
+                        }
+                        else if(column.ColType=="String")
+                        {
+                            generator.Emit(OpCodes.Ldtoken, property.PropertyType);
+                            generator.Emit(OpCodes.Call,typeof(Type).GetMethod("GetTypeFromHandle",new Type[] { typeof(RuntimeTypeHandle) }));
+                            generator.Emit(OpCodes.Call, assembly.EnumConvert);
+                            generator.Emit(OpCodes.Unbox_Any, property.PropertyType);
+                        }
+                    }
+                    else
+                    {
+                        var cur = Nullable.GetUnderlyingType(property.PropertyType);
+                        generator.Emit(OpCodes.Call, ConvertMethods[cur == null ? property.PropertyType : cur]);//调用强转方法赋值
+                        if (cur != null)
+                        {
+                            generator.Emit(OpCodes.Newobj, property.PropertyType.GetConstructor(new Type[] { cur }));
+                        }
                     }
                 }
                 //效果类似  Name=Convert.ToString(row["PName"]);
@@ -147,11 +164,29 @@ namespace EntityMappingDB
                 generator.Emit(OpCodes.Call, assembly.GetValueMethod);//获取数据库值
                 if (property.PropertyType.IsValueType || property.PropertyType == typeof(string))
                 {
-                    var cur = Nullable.GetUnderlyingType(property.PropertyType);
-                    generator.Emit(OpCodes.Call, ConvertMethods[cur == null ? property.PropertyType : cur]);//调用强转方法赋值
-                    if (cur != null)
+
+                    if (property.PropertyType.IsEnum)
                     {
-                        generator.Emit(OpCodes.Newobj, property.PropertyType.GetConstructor(new Type[] { cur }));
+                        if (column.ColType == "Int32")
+                        {
+                            generator.Emit(OpCodes.Unbox_Any, property.PropertyType);
+                        }
+                        else if (column.ColType == "String")
+                        {
+                            generator.Emit(OpCodes.Ldtoken, property.PropertyType);
+                            generator.Emit(OpCodes.Call, typeof(Type).GetMethod("GetTypeFromHandle", new Type[] { typeof(RuntimeTypeHandle) }));
+                            generator.Emit(OpCodes.Call, assembly.EnumConvert);
+                            generator.Emit(OpCodes.Unbox_Any, property.PropertyType);
+                        }
+                    }
+                    else
+                    {
+                        var cur = Nullable.GetUnderlyingType(property.PropertyType);
+                        generator.Emit(OpCodes.Call, ConvertMethods[cur == null ? property.PropertyType : cur]);//调用强转方法赋值
+                        if (cur != null)
+                        {
+                            generator.Emit(OpCodes.Newobj, property.PropertyType.GetConstructor(new Type[] { cur }));
+                        }
                     }
                 }
                 //效果类似  Name=Convert.ToString(row["PName"]);
@@ -179,11 +214,13 @@ namespace EntityMappingDB
         {
             List<MapColumn> lst = new List<MapColumn>(Properties.Length);
             Dictionary<string, string> dicCols = new Dictionary<string, string>();
+            Dictionary<string, string> dicType = new Dictionary<string, string>();
             if(ignore)
             {
                 foreach (DataColumn col in dt.Columns)
                 {
                     dicCols[col.ColumnName.ToLower()] = col.ColumnName;
+                    dicCols[col.ColumnName] = col.DataType.Name;
                 }
             }
             foreach (var property in Properties)
@@ -204,6 +241,7 @@ namespace EntityMappingDB
                     if (dicCols.ContainsKey(colName.ToLower()))
                     {
                         MapColumn column = new MapColumn() { ColumnName = dicCols[colName.ToLower()], Property = property };
+                        column.ColType = dicType[column.ColumnName];
                         lst.Add(column);
                     }
                 }
@@ -212,6 +250,7 @@ namespace EntityMappingDB
                     if (dt.Columns.Contains(colName))
                     {
                         MapColumn column = new MapColumn() { ColumnName = colName, Property = property };
+                        column.ColType = dt.Columns[colName].DataType.Name;
                         lst.Add(column);
                     }
                 }
@@ -226,13 +265,20 @@ namespace EntityMappingDB
         /// <param name="reader"></param>
         /// <param name="Properties"></param>
         /// <returns></returns>
-        private static MapColumn[] CheckProperty(IDataReader reader, PropertyInfo[] Properties)
+        private static MapColumn[] CheckProperty(IDataReader reader, PropertyInfo[] Properties,bool ignore=false)
         {
             List<MapColumn> lst = new List<MapColumn>(Properties.Length);
             List<string> lstCol = new List<string>(reader.FieldCount);
+            Dictionary<string, string> dicCol = new Dictionary<string, string>();
+            Dictionary<string, string> dicType = new Dictionary<string, string>();
             for (int i = 0; i < reader.FieldCount; i++)
             {
                 lstCol.Add(reader.GetName(i));
+                dicType[reader.GetName(i)] = reader.GetDataTypeName(i);
+                if(ignore)
+                {
+                    dicCol[reader.GetName(i).ToLower()] = reader.GetName(i);
+                }
             }
             foreach (var property in Properties)
             {
@@ -242,9 +288,19 @@ namespace EntityMappingDB
                 {
                     colName = aliasAttr.ColumnName;
                 }
+                if(ignore)
+                {
+                    if(dicCol.ContainsKey(colName.ToLower()))
+                    {
+                        MapColumn column = new MapColumn() { ColumnName = dicCol[colName.ToLower()], Property = property };
+                        column.ColType = dicType[column.ColumnName];
+                        lst.Add(column);
+                    }
+                }
                 if (lstCol.Contains(colName))
                 {
                     MapColumn column = new MapColumn() { ColumnName = colName, Property = property };
+                    column.ColType = dicType[column.ColumnName];
                     lst.Add(column);
                 }
 

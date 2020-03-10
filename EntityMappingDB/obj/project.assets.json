@@ -323,11 +323,11 @@
   "project": {
     "version": "1.2.1",
     "restore": {
-      "projectUniqueName": "E:\\Study\\DB\\EntityMappingDBEmit\\EntityMappingDB\\EntityMappingDB.csproj",
+      "projectUniqueName": "E:\\Study\\d\\EntityMappingDB\\EntityMappingDB\\EntityMappingDB.csproj",
       "projectName": "EntityMappingDB",
-      "projectPath": "E:\\Study\\DB\\EntityMappingDBEmit\\EntityMappingDB\\EntityMappingDB.csproj",
+      "projectPath": "E:\\Study\\d\\EntityMappingDB\\EntityMappingDB\\EntityMappingDB.csproj",
       "packagesPath": "C:\\Users\\jinyu\\.nuget\\packages\\",
-      "outputPath": "E:\\Study\\DB\\EntityMappingDBEmit\\EntityMappingDB\\obj\\",
+      "outputPath": "E:\\Study\\d\\EntityMappingDB\\EntityMappingDB\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\jinyu\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -341,7 +341,7 @@
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "d:\\Program Files (x86)\\DevExpress 19.2\\.NET Core Desktop Libraries\\System\\Components\\Packages": {},
-        "d:\\Program Files (x86)\\DevExpress 19.2\\Components\\System\\Components\\Packages": {},
+        "d:\\Program Files\\DevExpress 19.2\\Components\\System\\Components\\Packages": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

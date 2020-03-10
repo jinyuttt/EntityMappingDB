@@ -24,6 +24,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Reflection;
 using System.Reflection.Emit;
+using System.Linq;
 
 namespace EntityMappingDB
 {
@@ -37,6 +38,7 @@ namespace EntityMappingDB
     public  static partial class DynamicEntityMappingDB
     {
         public static bool IsCache = true;
+
 
       
         //数据类型和对应的强制转换方法的methodinfo，供实体属性赋值时调用
@@ -173,14 +175,22 @@ namespace EntityMappingDB
         /// <param name="dt">DataTable</param>
         /// <param name="Properties">属性集合</param>
         /// <returns>有列的属性集合</returns>
-        private static MapColumn[] CheckProperty(DataTable dt, PropertyInfo[] Properties)
+        private static MapColumn[] CheckProperty(DataTable dt, PropertyInfo[] Properties,bool ignore)
         {
             List<MapColumn> lst = new List<MapColumn>(Properties.Length);
+            Dictionary<string, string> dicCols = new Dictionary<string, string>();
+            if(ignore)
+            {
+                foreach (DataColumn col in dt.Columns)
+                {
+                    dicCols[col.ColumnName.ToLower()] = col.ColumnName;
+                }
+            }
             foreach (var property in Properties)
             {
                 string colName = property.Name;
                 NoColumnAttribute noColumn = property.GetCustomAttribute<NoColumnAttribute>();
-                if(noColumn!=null)
+                if (noColumn != null)
                 {
                     continue;
                 }
@@ -189,10 +199,21 @@ namespace EntityMappingDB
                 {
                     colName = aliasAttr.ColumnName;
                 }
-                if (dt.Columns.Contains(colName))
+                if (ignore)
                 {
-                    MapColumn column = new MapColumn() { ColumnName = colName, Property = property };
-                    lst.Add(column);
+                    if (dicCols.ContainsKey(colName.ToLower()))
+                    {
+                        MapColumn column = new MapColumn() { ColumnName = dicCols[colName.ToLower()], Property = property };
+                        lst.Add(column);
+                    }
+                }
+                else
+                {
+                    if (dt.Columns.Contains(colName))
+                    {
+                        MapColumn column = new MapColumn() { ColumnName = colName, Property = property };
+                        lst.Add(column);
+                    }
                 }
             }
             return lst.ToArray();
@@ -434,7 +455,7 @@ namespace EntityMappingDB
         /// <typeparam name="T"></typeparam>
         /// <param name="dt"></param>
         /// <returns></returns>
-        public static List<T>  ToEntityList<T>(this DataTable dt)
+        public static List<T>  ToEntityList<T>(this DataTable dt,bool ignore=false)
         {
             List<T> list = new List<T>();
             if (dt == null || dt.Rows.Count == 0)
@@ -450,7 +471,7 @@ namespace EntityMappingDB
             if(load==null)
             {
                 var properties = typeof(T).GetProperties(BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
-                var mapColumns = CheckProperty(dt, properties);
+                var mapColumns = CheckProperty(dt, properties,ignore);
                 if (IsCache)
                 {
                     load = CreateDataRowMethod<T>(dt, mapColumns);
@@ -467,7 +488,7 @@ namespace EntityMappingDB
             return list;
         }
 
-        public static List<object> ToEntityList(this DataTable dt,Type type)
+        public static List<object> ToEntityList(this DataTable dt,Type type,bool ignore=false)
         {
             List<object> list = new List<object>();
             if (dt == null || dt.Rows.Count == 0)
@@ -483,7 +504,7 @@ namespace EntityMappingDB
             if (load == null)
             {
                 var properties = type.GetProperties(BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
-                var mapColumns = CheckProperty(dt, properties);
+                var mapColumns = CheckProperty(dt, properties,ignore);
                 if (IsCache)
                 {
                     load = CreateDataRowMethod(dt, mapColumns,type);

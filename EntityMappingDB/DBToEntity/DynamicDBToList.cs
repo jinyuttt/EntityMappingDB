@@ -215,14 +215,14 @@ namespace EntityMappingDB
             List<MapColumn> lst = new List<MapColumn>(Properties.Length);
             Dictionary<string, string> dicCols = new Dictionary<string, string>();
             Dictionary<string, string> dicType = new Dictionary<string, string>();
-            if(ignore)
+
+            //遍历列
+            foreach (DataColumn col in dt.Columns)
             {
-                foreach (DataColumn col in dt.Columns)
-                {
-                    dicCols[col.ColumnName.ToLower()] = col.ColumnName;
-                    dicCols[col.ColumnName] = col.DataType.Name;
-                }
+                dicCols[col.ColumnName.ToLower()] = col.ColumnName;
+                dicType[col.ColumnName] = col.DataType.Name;
             }
+            
             foreach (var property in Properties)
             {
                 string colName = property.Name;
@@ -247,7 +247,7 @@ namespace EntityMappingDB
                 }
                 else
                 {
-                    if (dt.Columns.Contains(colName))
+                    if (dicType.ContainsKey(colName))
                     {
                         MapColumn column = new MapColumn() { ColumnName = colName, Property = property };
                         column.ColType = dt.Columns[colName].DataType.Name;
@@ -268,12 +268,12 @@ namespace EntityMappingDB
         private static MapColumn[] CheckProperty(IDataReader reader, PropertyInfo[] Properties,bool ignore=false)
         {
             List<MapColumn> lst = new List<MapColumn>(Properties.Length);
-            List<string> lstCol = new List<string>(reader.FieldCount);
+           
             Dictionary<string, string> dicCol = new Dictionary<string, string>();
             Dictionary<string, string> dicType = new Dictionary<string, string>();
             for (int i = 0; i < reader.FieldCount; i++)
             {
-                lstCol.Add(reader.GetName(i));
+                
                 dicType[reader.GetName(i)] = reader.GetDataTypeName(i);
                 if(ignore)
                 {
@@ -297,7 +297,7 @@ namespace EntityMappingDB
                         lst.Add(column);
                     }
                 }
-                if (lstCol.Contains(colName))
+                if (dicType.ContainsKey(colName))
                 {
                     MapColumn column = new MapColumn() { ColumnName = colName, Property = property };
                     column.ColType = dicType[column.ColumnName];
@@ -583,7 +583,7 @@ namespace EntityMappingDB
         /// <typeparam name="T"></typeparam>
         /// <param name="dr"></param>
         /// <returns></returns>
-        public static List<T> ToEntityList<T>(this IDataReader dr)
+        public static List<T> ToEntityList<T>(this IDataReader dr,bool ignore=false)
         {
             List<T> list = new List<T>();
             LoadDataRecord<T> load = null;
@@ -595,7 +595,7 @@ namespace EntityMappingDB
             if(load==null)
             {
                 var properties = typeof(T).GetProperties(BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
-                var mapColumns = CheckProperty(dr, properties);
+                var mapColumns = CheckProperty(dr, properties, ignore);
                 if (IsCache)
                 {
                     load = CreateDataRecordMethod<T>(dr, mapColumns);
@@ -613,7 +613,7 @@ namespace EntityMappingDB
             return list;
         }
 
-        public static List<object> ToEntityList(this IDataReader dr,Type type)
+        public static List<object> ToEntityList(this IDataReader dr,Type type,bool ignore=false)
         {
             List<object> list = new List<object>();
             LoadDataRecord<object> load = null;
@@ -625,7 +625,7 @@ namespace EntityMappingDB
             if (load == null)
             {
                 var properties = type.GetProperties(BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
-                var mapColumns = CheckProperty(dr, properties);
+                var mapColumns = CheckProperty(dr, properties, ignore);
                 if (IsCache)
                 {
                     load = CreateDataRecordMethod(dr, mapColumns,type);

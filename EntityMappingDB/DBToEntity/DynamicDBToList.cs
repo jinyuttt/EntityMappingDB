@@ -225,6 +225,10 @@ namespace EntityMappingDB
             
             foreach (var property in Properties)
             {
+                if(!property.CanWrite)
+                {
+                    continue;//去除只读属性
+                }
                 string colName = property.Name;
                 NoColumnAttribute noColumn = property.GetCustomAttribute<NoColumnAttribute>();
                 if (noColumn != null)
@@ -282,26 +286,33 @@ namespace EntityMappingDB
             }
             foreach (var property in Properties)
             {
+                if(!property.CanWrite)
+                {
+                    continue;
+                }
                 string colName = property.Name;
                 DataFieldAttribute aliasAttr = property.GetCustomAttribute<DataFieldAttribute>();
                 if (aliasAttr != null)
                 {
                     colName = aliasAttr.ColumnName;
                 }
-                if(ignore)
+                if (ignore)
                 {
-                    if(dicCol.ContainsKey(colName.ToLower()))
+                    if (dicCol.ContainsKey(colName.ToLower()))
                     {
                         MapColumn column = new MapColumn() { ColumnName = dicCol[colName.ToLower()], Property = property };
                         column.ColType = dicType[column.ColumnName];
                         lst.Add(column);
                     }
                 }
-                if (dicType.ContainsKey(colName))
+                else
                 {
-                    MapColumn column = new MapColumn() { ColumnName = colName, Property = property };
-                    column.ColType = dicType[column.ColumnName];
-                    lst.Add(column);
+                    if (dicType.ContainsKey(colName))
+                    {
+                        MapColumn column = new MapColumn() { ColumnName = colName, Property = property };
+                        column.ColType = dicType[column.ColumnName];
+                        lst.Add(column);
+                    }
                 }
 
             }
@@ -511,7 +522,7 @@ namespace EntityMappingDB
         /// <typeparam name="T"></typeparam>
         /// <param name="dt"></param>
         /// <returns></returns>
-        public static List<T>  ToEntityList<T>(this DataTable dt,bool ignore=false)
+        public static List<T>  ToEntityList<T>(this DataTable dt,bool ignore=true)
         {
             List<T> list = new List<T>();
             if (dt == null || dt.Rows.Count == 0)
@@ -544,7 +555,7 @@ namespace EntityMappingDB
             return list;
         }
 
-        public static List<object> ToEntityList(this DataTable dt,Type type,bool ignore=false)
+        public static List<object> ToEntityList(this DataTable dt,Type type,bool ignore=true)
         {
             List<object> list = new List<object>();
             if (dt == null || dt.Rows.Count == 0)

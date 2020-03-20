@@ -328,15 +328,11 @@ namespace EntityMappingDB
         private static LoadDataRow<T> FindDataRowMethod<T>(DataTable dt)
         {
             string key = dt.TableName;
-            if (string.IsNullOrEmpty(key))
+            if (string.IsNullOrEmpty(key)|| key.ToLower() == "tablename")
             {
-                key = dt.Columns.Count + "_";
-                foreach (DataColumn col in dt.Columns)
-                {
-                    key = key + col.ColumnName + "_";
-                }
-                key = key + dataRowAssembly.MethodName + typeof(T).FullName;
+                key = dt.Columns.Count + "_" + dataRowAssembly.MethodName + typeof(T).FullName;
             }
+          
             LoadDataRow<T> load = null;
             object v = null;
             if (ConvertCache<string, object>.Singleton.TryGet(key, out v))
@@ -349,15 +345,12 @@ namespace EntityMappingDB
         private static LoadDataRow<object> FindObjectDataRowMethod(DataTable dt,Type type)
         {
             string key = dt.TableName;
-            if (string.IsNullOrEmpty(key))
+            if (string.IsNullOrEmpty(key)||key.ToLower() == "tablename")
             {
-                key = dt.Columns.Count + "_";
-                foreach (DataColumn col in dt.Columns)
-                {
-                    key = key + col.ColumnName + "_";
-                }
-                key = key + dataRowAssembly.MethodName + type.FullName;
+                key = dt.Columns.Count + "_" + dataRowAssembly.MethodName + type.FullName;
+               
             }
+           
             LoadDataRow<object> load = null;
             object v = null;
             if (ConvertCache<string, object>.Singleton.TryGet(key, out v))
@@ -381,15 +374,11 @@ namespace EntityMappingDB
             if (dt != null)
             {
                 key=dt.TableName;
-                if (string.IsNullOrEmpty(key))
+                if (string.IsNullOrEmpty(key)|| key.ToLower() == "tablename")
                 {
                     //如果DataTable名称没有，则按照所有列名称定Key
-                    key = dt.Columns.Count + "_";
-                    foreach (DataColumn col in dt.Columns)
-                    {
-                        key = key + col.ColumnName + "_";
-                    }
-                    key = key + dataRowAssembly.MethodName + typeof(T).FullName;
+                    key = dt.Columns.Count + "_" + dataRowAssembly.MethodName + typeof(T).FullName;
+                  
                 }
             }
             LoadDataRow<T> load = (LoadDataRow<T>)BuildMethod<T>(dataRowAssembly, mapColumns,key).CreateDelegate(typeof(LoadDataRow<T>));
@@ -409,12 +398,9 @@ namespace EntityMappingDB
                 if (string.IsNullOrEmpty(key))
                 {
                     //如果DataTable名称没有，则按照所有列名称定Key
-                    key = dt.Columns.Count + "_";
-                    foreach (DataColumn col in dt.Columns)
-                    {
-                        key = key + col.ColumnName + "_";
-                    }
-                    key = key + dataRowAssembly.MethodName + type.FullName;
+                    key = dt.Columns.Count + "_" + dataRowAssembly.MethodName + type.FullName;
+
+                    
                 }
             }
             LoadDataRow<object> load = (LoadDataRow<object>)BuildMethod(dataRowAssembly,type, mapColumns, key).CreateDelegate(typeof(LoadDataRow<object>));
@@ -432,14 +418,12 @@ namespace EntityMappingDB
         /// <typeparam name="T"></typeparam>
         /// <param name="reader"></param>
         /// <returns></returns>
-        private static LoadDataRecord<T> FindDataRecordMethod<T>(IDataReader reader)
+        private static LoadDataRecord<T> FindDataRecordMethod<T>(IDataReader reader, string key = null)
         {
-            string key = reader.FieldCount + "_";
-            for (int i = 0; i < reader.FieldCount; i++)
+            if (string.IsNullOrEmpty(key))
             {
-                key = key + reader.GetName(i) + "_";
+                key = reader.FieldCount + "_" +dataRecordAssembly.MethodName+ typeof(T).FullName;
             }
-            key = key + dataRecordAssembly.MethodName + typeof(T).FullName;
             LoadDataRecord<T> load = null;
             object v = null;
             if (ConvertCache<string, object>.Singleton.TryGet(key, out v))
@@ -449,14 +433,13 @@ namespace EntityMappingDB
             return load;
         }
 
-        private static LoadDataRecord<object> FindObjectDataRecordMethod(IDataReader reader,Type type)
+        private static LoadDataRecord<object> FindObjectDataRecordMethod(IDataReader reader,Type type, string key = null)
         {
-            string key = reader.FieldCount + "_";
-            for (int i = 0; i < reader.FieldCount; i++)
+            if (string.IsNullOrEmpty(key))
             {
-                key = key + reader.GetName(i) + "_";
+                key = reader.FieldCount + "_" + dataRecordAssembly.MethodName + type.FullName;
             }
-            key = key + dataRecordAssembly.MethodName + type.FullName;
+         
             LoadDataRecord<object> load = null;
             object v = null;
             if (ConvertCache<string, object>.Singleton.TryGet(key, out v))
@@ -474,18 +457,13 @@ namespace EntityMappingDB
         /// <param name="reader"></param>
         /// <param name="mapColumns"></param>
         /// <returns></returns>
-        private static LoadDataRecord<T> CreateDataRecordMethod<T>(IDataReader reader,MapColumn[] mapColumns)
+        private static LoadDataRecord<T> CreateDataRecordMethod<T>(IDataReader reader,MapColumn[] mapColumns,string key=null)
         {
-            string key =null;
-            if (reader != null)
+            if (string.IsNullOrEmpty(key) && reader != null)
             {
-                key = reader.FieldCount + "_";
-                for (int i = 0; i < reader.FieldCount; i++)
-                {
-                    key = key + reader.GetName(i) + "_";
-                }
-                key = key + dataRecordAssembly.MethodName + typeof(T).FullName;
+                key = reader.FieldCount + "_" + dataRecordAssembly.MethodName + typeof(T).FullName;
             }
+        
             LoadDataRecord<T> load = (LoadDataRecord<T>)BuildMethod<T>(dataRecordAssembly, mapColumns,key).CreateDelegate(typeof(LoadDataRecord<T>));
             if (key != null)
             {
@@ -494,17 +472,14 @@ namespace EntityMappingDB
             return load;
         }
 
-        private static LoadDataRecord<object> CreateDataRecordMethod(IDataReader reader, MapColumn[] mapColumns,Type type)
+        private static LoadDataRecord<object> CreateDataRecordMethod(IDataReader reader, MapColumn[] mapColumns,Type type,string key=null)
         {
-            string key = null;
-            if (reader != null)
+
+            if (reader != null && string.IsNullOrEmpty(key))
             {
-                key = reader.FieldCount + "_";
-                for (int i = 0; i < reader.FieldCount; i++)
-                {
-                    key = key + reader.GetName(i) + "_";
-                }
-                key = key + dataRecordAssembly.MethodName + type.FullName;
+                key = reader.FieldCount + "_" + dataRecordAssembly.MethodName + type.FullName;
+
+
             }
             LoadDataRecord<object> load = (LoadDataRecord<object>)BuildMethod(dataRecordAssembly,type, mapColumns, key).CreateDelegate(typeof(LoadDataRecord<object>));
             if (key != null)
@@ -516,11 +491,13 @@ namespace EntityMappingDB
 
 
 
+
         /// <summary>
-        /// emit 转换实体
+        /// 转换实体
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="dt"></param>
+        /// <typeparam name="T">实体类型</typeparam>
+        /// <param name="dt">DataTable</param>
+        /// <param name="ignore">忽略属性大小写，默认忽略</param>
         /// <returns></returns>
         public static List<T>  ToEntityList<T>(this DataTable dt,bool ignore=true)
         {
@@ -555,6 +532,13 @@ namespace EntityMappingDB
             return list;
         }
 
+        /// <summary>
+        /// 转换实体
+        /// </summary>
+        /// <param name="dt">datatable</param>
+        /// <param name="type">实体类型</param>
+        /// <param name="ignore">忽略属性大小写，默认忽略</param>
+        /// <returns></returns>
         public static List<object> ToEntityList(this DataTable dt,Type type,bool ignore=true)
         {
             List<object> list = new List<object>();
@@ -588,19 +572,22 @@ namespace EntityMappingDB
             return list;
         }
 
+
         /// <summary>
-        /// emit转换实体
+        /// 转换实体
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="dr"></param>
+        /// <typeparam name="T">实体类型</typeparam>
+        /// <param name="dr">DataReader</param>
+        /// <param name="key">缓存Key</param>
+        /// <param name="ignore">忽略大消息，默认忽略</param>
         /// <returns></returns>
-        public static List<T> ToEntityList<T>(this IDataReader dr,bool ignore=false)
+        public static List<T> ToEntityList<T>(this IDataReader dr,string key=null,bool ignore=true)
         {
             List<T> list = new List<T>();
             LoadDataRecord<T> load = null;
             if (IsCache)
             {
-                load = FindDataRecordMethod<T>(dr);
+                load = FindDataRecordMethod<T>(dr,key);
             }
            
             if(load==null)
@@ -624,13 +611,21 @@ namespace EntityMappingDB
             return list;
         }
 
-        public static List<object> ToEntityList(this IDataReader dr,Type type,bool ignore=false)
+        /// <summary>
+        /// 转行实体
+        /// </summary>
+        /// <param name="dr">DataReader</param>
+        /// <param name="type">实体类型</param>
+        /// <param name="key">缓存Key</param>
+        /// <param name="ignore">忽略属性大小写，默认忽略</param>
+        /// <returns></returns>
+        public static List<object> ToEntityList(this IDataReader dr,Type type,string key=null,bool ignore=true)
         {
             List<object> list = new List<object>();
             LoadDataRecord<object> load = null;
             if (IsCache)
             {
-                load = FindObjectDataRecordMethod(dr,type);
+                load = FindObjectDataRecordMethod(dr,type,key);
             }
 
             if (load == null)
@@ -639,11 +634,11 @@ namespace EntityMappingDB
                 var mapColumns = CheckProperty(dr, properties, ignore);
                 if (IsCache)
                 {
-                    load = CreateDataRecordMethod(dr, mapColumns,type);
+                    load = CreateDataRecordMethod(dr, mapColumns,type,key);
                 }
                 else
                 {
-                    load = CreateDataRecordMethod(null, mapColumns,type);
+                    load = CreateDataRecordMethod(null, mapColumns,type,key);
                 }
 
             }

@@ -74,7 +74,7 @@ namespace EntityMappingDB.DBToEntity
         }
 
         /// <summary>
-        /// 
+        /// 枚举名称转枚举类型
         /// </summary>
         /// <param name="obj"></param>
         /// <param name="type"></param>

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>EntityMappingDB</id>
+    <version>1.3.3</version>
+    <authors>jinyu成都</authors>
+    <owners>jinyu成都</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <licenseUrl>https://github.com/jinyuttt/EntityMappingDBEmit/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/jinyuttt/EntityMappingDBEmit.git</projectUrl>
+    <description>DB与实体转换，个人贡献</description>
+    <releaseNotes>使用emit方法DataTable,DataReader与实体对象转换</releaseNotes>
+    <copyright>2019</copyright>
+    <dependencies>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="System.Reflection.Emit.Lightweight" version="4.7.0" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="E:\Study\dv\EntityMappingDB\EntityMappingDB\bin\Release\netstandard2.0\EntityMappingDB.dll" target="lib\netstandard2.0\EntityMappingDB.dll" />
+  </files>
+</package>

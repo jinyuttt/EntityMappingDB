@@ -7,7 +7,7 @@
     <Copyright>2019</Copyright>
     <PackageLicenseUrl>https://github.com/jinyuttt/EntityMappingDBEmit/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/jinyuttt/EntityMappingDBEmit.git</PackageProjectUrl>
-    <PackageReleaseNotes>使用emit方法DataTable,DataReader与实体对象转换</PackageReleaseNotes>
+    <PackageReleaseNotes>修改缓存key的默认值</PackageReleaseNotes>
     <Authors>jinyu成都</Authors>
   </PropertyGroup>
 

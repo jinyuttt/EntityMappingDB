@@ -1,10 +1,10 @@
 ﻿#region << 版 本 注 释 >>
 /*----------------------------------------------------------------
-* 项目名称 ：EntityMappingDB.DBToEntity
+* 项目名称 ：EntityMappingDBCore.DBToEntity
 * 项目描述 ：
-* 类 名 称 ：DynamicEntityMappingDB.DBToEntity
+* 类 名 称 ：DynamicEntityMappingDBCore.DBToEntity
 * 类 描 述 ：
-* 命名空间 ：EntityMappingDB.DBToEntity
+* 命名空间 ：EntityMappingDBCore.DBToEntity
 * CLR 版本 ：4.0.30319.42000
 * 作    者 ：jinyu
 * 创建时间 ：2019
@@ -17,8 +17,8 @@
 
 
 
-using EntityMappingDB.CacheBuffers;
-using EntityMappingDB.DBToEntity;
+using EntityMappingDBCore.CacheBuffers;
+using EntityMappingDBCore.DBToEntity;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -26,7 +26,7 @@ using System.Reflection;
 using System.Reflection.Emit;
 using System.Linq;
 
-namespace EntityMappingDB
+namespace EntityMappingDBCore
 {
     /* ============================================================================== 
 * 功能描述：EntityConverter Emit转换实体
@@ -35,7 +35,7 @@ namespace EntityMappingDB
 * 更新时间 ：2019
 * ==============================================================================*/
 
-    public  static partial class DynamicEntityMappingDB
+    public  static partial class DynamicEntityMappingDBCore
     {
         public static bool IsCache = true;
 
@@ -80,14 +80,28 @@ namespace EntityMappingDB
         /// <typeparam name="T">返回的实体类型</typeparam>
         /// <param name="assembly">待转换数据的元数据信息</param>
         /// <returns>实体对象</returns>
-        private static DynamicMethod BuildMethod<T>(DynamicAssembleInfo assembly, MapColumn[] mapColumns = null, string methodName="")
+        private static void BuildMethod<T>(DynamicAssembleInfo assembly, MapColumn[] mapColumns = null, string methodName="")
         {
-            if(methodName==null)
-            {
-                methodName = "";
-            }
-            DynamicMethod method = new DynamicMethod(methodName+assembly.MethodName + typeof(T).Name, MethodAttributes.Public | MethodAttributes.Static, CallingConventions.Standard, typeof(T),
-                    new Type[] { assembly.SourceType }, typeof(EntityContext).Module, true);
+            var asmName = new AssemblyName("MyClass");
+
+            //首先就需要定义一个程序集
+            var defAssembly = AppDomain.CurrentDomain.DefineDynamicAssembly(asmName, AssemblyBuilderAccess.RunAndSave);
+            //首先就需要定义一个程序集
+            //var defAssembly = AppDomain.CurrentDomain.DefineDynamicAssembly(asmName, AssemblyBuilderAccess.RunAndSave);
+            //if (methodName==null)
+            //{
+            //    methodName = "";
+            //}
+            var defModuleBuilder = defAssembly.DefineDynamicModule("MyModule", "MyAssembly.dll");
+            var defClassBuilder = defModuleBuilder.DefineType("MyClass", TypeAttributes.Public);
+            //定义一个方法
+            var method = defClassBuilder.DefineMethod("MyMethod",
+                MethodAttributes.Public,
+                   typeof(T),//返回类型
+                  new Type[] { assembly.SourceType }//参数的类型
+             );
+            //DynamicMethod method = new DynamicMethod(methodName+assembly.MethodName + typeof(T).Name, MethodAttributes.Public | MethodAttributes.Static, CallingConventions.Standard, typeof(T),
+            //        new Type[] { assembly.SourceType }, typeof(EntityContext).Module, true);
             ILGenerator generator = method.GetILGenerator();
             LocalBuilder result = generator.DeclareLocal(typeof(T));
             generator.Emit(OpCodes.Newobj, typeof(T).GetConstructor(Type.EmptyTypes));
@@ -96,14 +110,14 @@ namespace EntityMappingDB
             {
                 PropertyInfo property = column.Property;
                 var endIfLabel = generator.DefineLabel();
-                generator.Emit(OpCodes.Ldarg_0);
+                generator.Emit(OpCodes.Ldarg_1);
                 //第一组，调用AssembleInfo的CanSetted方法，判断是否可以转换
                 generator.Emit(OpCodes.Ldstr, column.ColumnName);
                 generator.Emit(OpCodes.Call, assembly.CanSettedMethod);
                 generator.Emit(OpCodes.Brfalse, endIfLabel);
                 //第二组,属性设置
                 generator.Emit(OpCodes.Ldloc, result);
-                generator.Emit(OpCodes.Ldarg_0);
+                generator.Emit(OpCodes.Ldarg_1);
                 generator.Emit(OpCodes.Ldstr, column.ColumnName);
                 generator.Emit(OpCodes.Call, assembly.GetValueMethod);//获取数据库值
                 if (property.PropertyType.IsValueType || property.PropertyType == typeof(string))
@@ -163,7 +177,12 @@ namespace EntityMappingDB
             }
             generator.Emit(OpCodes.Ldloc, result);
             generator.Emit(OpCodes.Ret);
-            return method;
+            // 创建类型
+            defClassBuilder.CreateType();
+
+            //保存程序集
+            defAssembly.Save("MyAssemblydll");
+          
         }
 
         private static DynamicMethod BuildMethod(DynamicAssembleInfo assembly, Type type, MapColumn[] mapColumns = null, string methodName = "")
@@ -433,11 +452,13 @@ namespace EntityMappingDB
                   
                 }
             }
-            LoadDataRow<T> load = (LoadDataRow<T>)BuildMethod<T>(dataRowAssembly, mapColumns,key).CreateDelegate(typeof(LoadDataRow<T>));
-            if (key != null)
-            {
-                ConvertCache<string, object>.Singleton.Set(key, load);
-            }
+            //LoadDataRow<T> load = (LoadDataRow<T>)BuildMethod<T>(dataRowAssembly, mapColumns,key).CreateDelegate(typeof(LoadDataRow<T>));
+            //if (key != null)
+            //{
+            //    ConvertCache<string, object>.Singleton.Set(key, load);
+            //}
+            BuildMethod<T>(dataRowAssembly, mapColumns, key);
+            LoadDataRow<T> load=null;
             return load;
         }
 
@@ -515,8 +536,8 @@ namespace EntityMappingDB
             {
                 key = reader.FieldCount + "_" + dataRecordAssembly.MethodName + typeof(T).FullName;
             }
-        
-            LoadDataRecord<T> load = (LoadDataRecord<T>)BuildMethod<T>(dataRecordAssembly, mapColumns,key).CreateDelegate(typeof(LoadDataRecord<T>));
+
+            LoadDataRecord<T> load = null;// (LoadDataRecord<T>)BuildMethod<T>(dataRecordAssembly, mapColumns,key).CreateDelegate(typeof(LoadDataRecord<T>));
             if (key != null)
             {
                 ConvertCache<string, object>.Singleton.Set(key, load);

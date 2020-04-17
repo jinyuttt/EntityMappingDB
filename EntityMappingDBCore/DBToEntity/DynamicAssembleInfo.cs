@@ -1,10 +1,10 @@
 ﻿#region << 版 本 注 释 >>
 /*----------------------------------------------------------------
-* 项目名称 ：EntityMappingDB.DBToEntity
+* 项目名称 ：EntityMappingDBCore.DBToEntity
 * 项目描述 ：
 * 类 名 称 ：AssembleInfo
 * 类 描 述 ：
-* 命名空间 ：EntityMappingDB.DBToEntity
+* 命名空间 ：EntityMappingDBCore.DBToEntity
 * CLR 版本 ：4.0.30319.42000
 * 作    者 ：jinyu
 * 创建时间 ：2019
@@ -22,7 +22,7 @@ using System.Reflection;
 using System.Data;
 using System.Text.RegularExpressions;
 
-namespace EntityMappingDB.DBToEntity
+namespace EntityMappingDBCore.DBToEntity
 {
     /* ============================================================================== 
 * 功能描述：AssembleInfo  emit所需要的元数据信息

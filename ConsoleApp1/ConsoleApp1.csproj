@@ -50,9 +50,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\EntityMappingDBCore\EntityMappingDBCore.csproj">
-      <Project>{7f19dd07-544a-4ff9-bc44-14cd91dd4b8b}</Project>
-      <Name>EntityMappingDBCore</Name>
+    <ProjectReference Include="..\EntityMappingDB\EntityMappingDB.csproj">
+      <Project>{605da8f0-97a6-4874-9ba6-1edfee443fe7}</Project>
+      <Name>EntityMappingDB</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -92,10 +92,10 @@ namespace EntityMappingDBCore.DBToEntity
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>
-        public static bool ScientificNotation(string str)
+        public static bool ScientificNotation(object obj)
         {
-           
-            Regex reg = new Regex(@"([+-]?)([^0]\d\.\d{1,})E([-]?)(\d+)", RegexOptions.IgnoreCase);
+            string str =(string)obj; 
+            Regex reg = new Regex("^[+-]?((\\d+\\.?\\d*)|(\\.\\d+))[Ee][+-]?\\d+$", RegexOptions.IgnoreCase);
            return reg.IsMatch(str);
         }
     }

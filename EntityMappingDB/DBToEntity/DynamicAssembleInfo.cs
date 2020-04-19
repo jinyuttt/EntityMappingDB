@@ -94,9 +94,9 @@ namespace EntityMappingDB.DBToEntity
         /// <returns></returns>
         public static bool ScientificNotation(string str)
         {
-           
-            Regex reg = new Regex(@"([+-]?)([^0]\d\.\d{1,})E([-]?)(\d+)", RegexOptions.IgnoreCase);
-           return reg.IsMatch(str);
+
+            Regex reg = new Regex("^[+-]?((\\d+\\.?\\d*)|(\\.\\d+))[Ee][+-]?\\d+$", RegexOptions.IgnoreCase);
+            return reg.IsMatch(str);
         }
     }
 }

@@ -39,7 +39,7 @@ namespace EntityMappingDBCore
     {
         public static bool IsCache = true;
 
-
+        static Type objtar = null;
       
         //数据类型和对应的强制转换方法的methodinfo，供实体属性赋值时调用
         private static readonly Dictionary<Type, MethodInfo> ConvertMethods = new Dictionary<Type, MethodInfo>()
@@ -80,7 +80,7 @@ namespace EntityMappingDBCore
         /// <typeparam name="T">返回的实体类型</typeparam>
         /// <param name="assembly">待转换数据的元数据信息</param>
         /// <returns>实体对象</returns>
-        private static void BuildMethod<T>(DynamicAssembleInfo assembly, MapColumn[] mapColumns = null, string methodName="")
+        private static MethodInfo BuildMethod<T>(DynamicAssembleInfo assembly, MapColumn[] mapColumns = null, string methodName="")
         {
             var asmName = new AssemblyName("MyClass");
 
@@ -108,8 +108,10 @@ namespace EntityMappingDBCore
             generator.Emit(OpCodes.Stloc, result);
             foreach (var column in  mapColumns)
             {
+               
                 PropertyInfo property = column.Property;
                 var endIfLabel = generator.DefineLabel();
+                var tmpIfLabel = generator.DefineLabel();
                 generator.Emit(OpCodes.Ldarg_1);
                 //第一组，调用AssembleInfo的CanSetted方法，判断是否可以转换
                 generator.Emit(OpCodes.Ldstr, column.ColumnName);
@@ -138,30 +140,44 @@ namespace EntityMappingDBCore
                     }
                     else
                     {
+                        LocalBuilder tmp = null;
                         var cur = Nullable.GetUnderlyingType(property.PropertyType);
                         var tmpType = cur;
                         if (cur == null)
                         {
+                            //不是可空
                             cur = property.PropertyType;
                         }
-                        if (column.ColType == "String" && cur.Name != "Double")
+                        if (cur == typeof(decimal) && column.ColType == "String")
                         {
-                            var tmpIfLabel = generator.DefineLabel();
-                            LocalBuilder tmp = generator.DeclareLocal(typeof(string));
-                            generator.Emit(OpCodes.Call, ConvertMethods[typeof(string)]);
-                            generator.Emit(OpCodes.Stloc, tmp);
-                            generator.Emit(OpCodes.Ldloc, tmp);
-                            generator.Emit(OpCodes.Call, assembly.CanScientific);
-                            generator.Emit(OpCodes.Brfalse, tmpIfLabel);
-                            // generator.Emit(OpCodes.Stloc, tmp);
-                            generator.Emit(OpCodes.Call, typeof(Convert).GetMethod("ToDouble", new Type[] { typeof(string) }));
-                            generator.Emit(OpCodes.Call, ConvertStringMethods[cur]);
-                            generator.MarkLabel(tmpIfLabel);
 
+                            tmp = generator.DeclareLocal(typeof(object));
+                            var tmpBool = generator.DeclareLocal(typeof(bool));
+                            generator.Emit(OpCodes.Call, ConvertMethods[typeof(string)]);//调用强转方法转；
+                            generator.Emit(OpCodes.Stloc, tmp);//
+                            generator.Emit(OpCodes.Ldloc, tmp);//
+                            generator.Emit(OpCodes.Call, assembly.CanScientific);//调用强转方法转；
+                            generator.Emit(OpCodes.Stloc, tmpBool);//
+                            generator.Emit(OpCodes.Ldloc, tmpBool);//
+                            generator.Emit(OpCodes.Brfalse_S, tmpIfLabel);//
+                            generator.Emit(OpCodes.Ldloc, tmp);//
+                            generator.Emit(OpCodes.Call, ConvertMethods[typeof(double)]);//调用强转方法转；
+                            generator.Emit(OpCodes.Box, typeof(Double));
+                            generator.Emit(OpCodes.Stloc, tmp);
                         }
+
+                        generator.MarkLabel(tmpIfLabel);
+                        //
+                        if (tmp!=null)
+                        {
+                            generator.Emit(OpCodes.Ldloc, tmp);
+                        }
+                     
                         generator.Emit(OpCodes.Call, ConvertMethods[cur]);//调用强转方法赋值
+                        
                         if (tmpType != null)
                         {
+                            //说明是可空
                             generator.Emit(OpCodes.Newobj, property.PropertyType.GetConstructor(new Type[] { tmpType }));
                         }
                     }
@@ -172,17 +188,20 @@ namespace EntityMappingDBCore
                     generator.Emit(OpCodes.Castclass, property.PropertyType);
                 }
                 generator.Emit(OpCodes.Call, property.GetSetMethod());//直接给属性赋值
-                //效果类似  Name=row["PName"];
+                                                                      //效果类似  Name=row["PName"];
+                generator.Emit(OpCodes.Nop);
                 generator.MarkLabel(endIfLabel);
             }
             generator.Emit(OpCodes.Ldloc, result);
             generator.Emit(OpCodes.Ret);
             // 创建类型
-            defClassBuilder.CreateType();
-
+            var defTYpe=  defClassBuilder.CreateType();
+            objtar = defTYpe;
+            var mth = defTYpe.GetMethod("MyMethod");
+            defAssembly.SetEntryPoint(mth);
             //保存程序集
             defAssembly.Save("MyAssemblydll");
-          
+            return mth;
         }
 
         private static DynamicMethod BuildMethod(DynamicAssembleInfo assembly, Type type, MapColumn[] mapColumns = null, string methodName = "")
@@ -452,13 +471,13 @@ namespace EntityMappingDBCore
                   
                 }
             }
-            //LoadDataRow<T> load = (LoadDataRow<T>)BuildMethod<T>(dataRowAssembly, mapColumns,key).CreateDelegate(typeof(LoadDataRow<T>));
-            //if (key != null)
-            //{
-            //    ConvertCache<string, object>.Singleton.Set(key, load);
-            //}
-            BuildMethod<T>(dataRowAssembly, mapColumns, key);
-            LoadDataRow<T> load=null;
+            LoadDataRow<T> load = (LoadDataRow<T>)BuildMethod<T>(dataRowAssembly, mapColumns, key).CreateDelegate(typeof(LoadDataRow<T>),Activator.CreateInstance(objtar));
+            if (key != null)
+            {
+                ConvertCache<string, object>.Singleton.Set(key, load);
+            }
+
+            // LoadDataRow<T> load = BuildMethod<T>(dataRowAssembly, mapColumns, key);
             return load;
         }
 
@@ -580,12 +599,12 @@ namespace EntityMappingDBCore
                 return list;
             }
             LoadDataRow<T> load = null;
-            if(IsCache)
+            if (IsCache)
             {
-                load= FindDataRowMethod<T>(dt);
+                load = FindDataRowMethod<T>(dt);
             }
-                
-            if(load==null)
+
+            if (load == null)
             {
                 var properties = typeof(T).GetProperties(BindingFlags.GetProperty | BindingFlags.Public | BindingFlags.Instance | BindingFlags.IgnoreCase);
                 var mapColumns = CheckProperty(dt, properties,ignore);
@@ -598,9 +617,12 @@ namespace EntityMappingDBCore
                     load = CreateDataRowMethod<T>(null, mapColumns);
                 }
             }
+            // var mth = BuildMethod<T>(dataRowAssembly, mapColumns, null);
             foreach (DataRow dr in dt.Rows)
             {
-                list.Add(load(dr));
+                //  mth.Invoke(dr, null);
+                var p = load(dr);
+                list.Add(p);
             }
             return list;
         }

@@ -96,6 +96,7 @@ namespace EntityMappingDB
             {
                 PropertyInfo property = column.Property;
                 var endIfLabel = generator.DefineLabel();
+                var tmpIfLabel = generator.DefineLabel();
                 generator.Emit(OpCodes.Ldarg_0);
                 //第一组，调用AssembleInfo的CanSetted方法，判断是否可以转换
                 generator.Emit(OpCodes.Ldstr, column.ColumnName);
@@ -124,26 +125,35 @@ namespace EntityMappingDB
                     }
                     else
                     {
+                        LocalBuilder tmp = null;
                         var cur = Nullable.GetUnderlyingType(property.PropertyType);
                         var tmpType = cur;
                         if (cur == null)
                         {
                             cur = property.PropertyType;
                         }
-                        if (column.ColType == "String" && cur.Name != "Double")
+                        if (column.ColType == "String" && cur == typeof(decimal))
                         {
-                            var tmpIfLabel = generator.DefineLabel();
-                            LocalBuilder tmp = generator.DeclareLocal(typeof(string));
-                            generator.Emit(OpCodes.Call, ConvertMethods[typeof(string)]);
-                            generator.Emit(OpCodes.Stloc, tmp);
-                            generator.Emit(OpCodes.Ldloc, tmp);
-                            generator.Emit(OpCodes.Call, assembly.CanScientific);
-                            generator.Emit(OpCodes.Brfalse, tmpIfLabel);
-                            // generator.Emit(OpCodes.Stloc, tmp);
-                            generator.Emit(OpCodes.Call, typeof(Convert).GetMethod("ToDouble", new Type[] { typeof(string) }));
-                            generator.Emit(OpCodes.Call, ConvertStringMethods[cur]);
-                            generator.MarkLabel(tmpIfLabel);
 
+                            tmp = generator.DeclareLocal(typeof(object));
+                            var tmpBool = generator.DeclareLocal(typeof(bool));
+                            generator.Emit(OpCodes.Call, ConvertMethods[typeof(string)]);//调用强转方法转；
+                            generator.Emit(OpCodes.Stloc, tmp);//
+                            generator.Emit(OpCodes.Ldloc, tmp);//
+                            generator.Emit(OpCodes.Call, assembly.CanScientific);//调用判断；
+                            generator.Emit(OpCodes.Stloc, tmpBool);//
+                            generator.Emit(OpCodes.Ldloc, tmpBool);//
+                            generator.Emit(OpCodes.Brfalse_S, tmpIfLabel);//
+                            generator.Emit(OpCodes.Ldloc, tmp);//
+                            generator.Emit(OpCodes.Call, ConvertMethods[typeof(double)]);//调用强转方法转；
+                            generator.Emit(OpCodes.Box, typeof(Double));
+                            generator.Emit(OpCodes.Stloc, tmp);
+                        }
+                        generator.MarkLabel(tmpIfLabel);
+                        //
+                        if (tmp != null)
+                        {
+                            generator.Emit(OpCodes.Ldloc, tmp);
                         }
                         generator.Emit(OpCodes.Call, ConvertMethods[cur]);//调用强转方法赋值
                         if (tmpType != null)
@@ -182,6 +192,7 @@ namespace EntityMappingDB
             {
                 PropertyInfo property = column.Property;
                 var endIfLabel = generator.DefineLabel();
+                var tmpIfLabel = generator.DefineLabel();
                 generator.Emit(OpCodes.Ldarg_0);
                 //第一组，调用AssembleInfo的CanSetted方法，判断是否可以转换
                 generator.Emit(OpCodes.Ldstr, column.ColumnName);
@@ -211,6 +222,7 @@ namespace EntityMappingDB
                     }
                     else
                     {
+                        LocalBuilder tmp = null;
                         var cur = Nullable.GetUnderlyingType(property.PropertyType);//可空原始类型
                         if(cur==null)
                         {
@@ -218,21 +230,26 @@ namespace EntityMappingDB
                         }
                         if(column.ColType== "String"&&cur.Name!="Double")
                         {
-                            var  tmpIfLabel = generator.DefineLabel();
-                            LocalBuilder tmp = generator.DeclareLocal(typeof(string));
-                            LocalBuilder tmpBool = generator.DeclareLocal(typeof(bool));
-                            generator.Emit(OpCodes.Call, ConvertMethods[typeof(string)]);
+                            tmp = generator.DeclareLocal(typeof(object));
+                            var tmpBool = generator.DeclareLocal(typeof(bool));
+                            generator.Emit(OpCodes.Call, ConvertMethods[typeof(string)]);//调用强转方法转；
+                            generator.Emit(OpCodes.Stloc, tmp);//
+                            generator.Emit(OpCodes.Ldloc, tmp);//
+                            generator.Emit(OpCodes.Call, assembly.CanScientific);//调用判断；
+                            generator.Emit(OpCodes.Stloc, tmpBool);//
+                            generator.Emit(OpCodes.Ldloc, tmpBool);//
+                            generator.Emit(OpCodes.Brfalse_S, tmpIfLabel);//
+                            generator.Emit(OpCodes.Ldloc, tmp);//
+                            generator.Emit(OpCodes.Call, ConvertMethods[typeof(double)]);//调用强转方法转；
+                            generator.Emit(OpCodes.Box, typeof(Double));
                             generator.Emit(OpCodes.Stloc, tmp);
-                            generator.Emit(OpCodes.Ldloc, tmp);
-                            generator.Emit(OpCodes.Call, assembly.CanScientific);
-                            generator.Emit(OpCodes.Stloc, tmpBool);
-                            generator.Emit(OpCodes.Ldloc, tmpBool);
-                            generator.Emit(OpCodes.Brfalse, tmpIfLabel);
-                           // generator.Emit(OpCodes.Stloc, tmp);
-                            generator.Emit(OpCodes.Call, typeof(Convert).GetMethod("ToDouble", new Type[] { typeof(string) }));
-                            generator.Emit(OpCodes.Call, ConvertStringMethods[cur]);
-                            generator.MarkLabel(tmpIfLabel);
 
+                        }
+                        generator.MarkLabel(tmpIfLabel);
+                        //
+                        if (tmp != null)
+                        {
+                            generator.Emit(OpCodes.Ldloc, tmp);
                         }
                         generator.Emit(OpCodes.Call, ConvertMethods[cur == null ? property.PropertyType : cur]);//调用强转方法赋值
                         if (cur != null)

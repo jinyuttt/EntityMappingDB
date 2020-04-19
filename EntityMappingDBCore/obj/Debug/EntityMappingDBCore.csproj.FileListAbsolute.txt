@@ -1,6 +1,0 @@
-E:\Study\dv\EntityMappingDB\EntityMappingDBCore\obj\Debug\EntityMappingDBCore.csproj.CoreCompileInputs.cache
-E:\Study\dv\EntityMappingDB\EntityMappingDBCore\bin\Debug\EntityMappingDBCore.dll
-E:\Study\dv\EntityMappingDB\EntityMappingDBCore\bin\Debug\EntityMappingDBCore.pdb
-E:\Study\dv\EntityMappingDB\EntityMappingDBCore\obj\Debug\EntityMappingDBCore.csprojAssemblyReference.cache
-E:\Study\dv\EntityMappingDB\EntityMappingDBCore\obj\Debug\EntityMappingDBCore.dll
-E:\Study\dv\EntityMappingDB\EntityMappingDBCore\obj\Debug\EntityMappingDBCore.pdb

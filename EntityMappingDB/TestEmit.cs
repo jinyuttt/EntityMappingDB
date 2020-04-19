@@ -1,6 +1,7 @@
 ﻿using EntityMappingDB.DBToEntity;
 using System;
 using System.Data;
+using System.Diagnostics.CodeAnalysis;
 
 namespace MyTest
 {
@@ -8,21 +9,25 @@ namespace MyTest
     {
         public void  Test(DataRow row)
         {
+
             Person person = new Person();
-            string str = Convert.ToString(row["ss"]);
-            if (DynamicAssembleInfo.ScientificNotation(str))
+            string str = Convert.ToString(row["DTO"]);
+            object obj = str;
+            if (string.IsNullOrEmpty(str))
             {
-                person.Age=Convert.ToDecimal( Convert.ToDouble(str));
+                 obj = Convert.ToDouble(str);
             }
-            else
-            {
-                person.Age = Convert.ToDecimal(str);
-            }
+            person.DTO = Convert.ToDecimal(obj);
+          
+            
+         
         }
     }
 
     public class Person
     {
-        public decimal Age { get; set; }
+        public float Age { get; set; }
+
+        public decimal DTO { get; set; }
     }
 }

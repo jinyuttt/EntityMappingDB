@@ -36,7 +36,8 @@ FromEntityToTableAttribute扩展方法
 2.datareader默认使用列数+转换实体类型名称做key,如果不能区分需要传入缓存key
  
 
-
+2010-4-19  
+1.增加字符串转decimal类型是科学计数法格式
 
 
 说明：

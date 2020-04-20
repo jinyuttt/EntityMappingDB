@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\Study\\dv\\EntityMappingDB\\EntityMappingDB\\EntityMappingDB.csproj": {}
+    "E:\\Study\\db\\EntityMappingDB\\EntityMappingDB\\EntityMappingDB.csproj": {}
   },
   "projects": {
-    "E:\\Study\\dv\\EntityMappingDB\\EntityMappingDB\\EntityMappingDB.csproj": {
+    "E:\\Study\\db\\EntityMappingDB\\EntityMappingDB\\EntityMappingDB.csproj": {
       "version": "1.4.3",
       "restore": {
-        "projectUniqueName": "E:\\Study\\dv\\EntityMappingDB\\EntityMappingDB\\EntityMappingDB.csproj",
+        "projectUniqueName": "E:\\Study\\db\\EntityMappingDB\\EntityMappingDB\\EntityMappingDB.csproj",
         "projectName": "EntityMappingDB",
-        "projectPath": "E:\\Study\\dv\\EntityMappingDB\\EntityMappingDB\\EntityMappingDB.csproj",
+        "projectPath": "E:\\Study\\db\\EntityMappingDB\\EntityMappingDB\\EntityMappingDB.csproj",
         "packagesPath": "C:\\Users\\jinyu\\.nuget\\packages\\",
-        "outputPath": "E:\\Study\\dv\\EntityMappingDB\\EntityMappingDB\\obj\\",
+        "outputPath": "E:\\Study\\db\\EntityMappingDB\\EntityMappingDB\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\jinyu\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -25,7 +25,7 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "d:\\Program Files (x86)\\DevExpress 19.2\\.NET Core Desktop Libraries\\System\\Components\\Packages": {},
-          "d:\\Program Files (x86)\\DevExpress 19.2\\Components\\System\\Components\\Packages": {},
+          "d:\\Program Files\\DevExpress 19.2\\Components\\System\\Components\\Packages": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -63,7 +63,7 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100-preview.2.20176.6\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -53,17 +53,7 @@ namespace EntityMappingDB
            {typeof(Boolean),typeof(Convert).GetMethod("ToBoolean",new Type[]{typeof(object)})},
            {typeof(string),typeof(Convert).GetMethod("ToString",new Type[]{typeof(object)})}
        };
-        private static readonly Dictionary<Type, MethodInfo> ConvertStringMethods = new Dictionary<Type, MethodInfo>()
-       {
-           {typeof(int),typeof(Convert).GetMethod("ToInt32",new Type[]{typeof(double)})},
-           {typeof(Int16),typeof(Convert).GetMethod("ToInt16",new Type[]{typeof(double) })},
-           {typeof(Int64),typeof(Convert).GetMethod("ToInt64",new Type[]{typeof(double) })},
-          
-           {typeof(decimal),typeof(Convert).GetMethod("ToDecimal",new Type[]{typeof(double) })},
-           {typeof(Double),typeof(Convert).GetMethod("ToDouble",new Type[]{typeof(double) })},
-           {typeof(Boolean),typeof(Convert).GetMethod("ToBoolean",new Type[]{typeof(double) })},
-           {typeof(string),typeof(Convert).GetMethod("ToString",new Type[]{typeof(double) })}
-       };
+       
         //把datarow转换为实体的方法的委托定义
         public delegate T LoadDataRow<T>(DataRow dr);
         //把datareader转换为实体的方法的委托定义
@@ -228,7 +218,7 @@ namespace EntityMappingDB
                         {
                             cur = property.PropertyType;
                         }
-                        if(column.ColType== "String"&&cur.Name!="Double")
+                        if(column.ColType== "String"&&cur==typeof(decimal))
                         {
                             tmp = generator.DeclareLocal(typeof(object));
                             var tmpBool = generator.DeclareLocal(typeof(bool));
@@ -243,7 +233,6 @@ namespace EntityMappingDB
                             generator.Emit(OpCodes.Call, ConvertMethods[typeof(double)]);//调用强转方法转；
                             generator.Emit(OpCodes.Box, typeof(Double));
                             generator.Emit(OpCodes.Stloc, tmp);
-
                         }
                         generator.MarkLabel(tmpIfLabel);
                         //

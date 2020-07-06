@@ -1,0 +1,8 @@
+E:\db\EntityMappingDB\EntityMappingDB\bin\Debug\netstandard2.0\EntityMappingDB.deps.json
+E:\db\EntityMappingDB\EntityMappingDB\bin\Debug\netstandard2.0\EntityMappingDB.dll
+E:\db\EntityMappingDB\EntityMappingDB\bin\Debug\netstandard2.0\EntityMappingDB.pdb
+E:\db\EntityMappingDB\EntityMappingDB\obj\Debug\netstandard2.0\EntityMappingDB.AssemblyInfoInputs.cache
+E:\db\EntityMappingDB\EntityMappingDB\obj\Debug\netstandard2.0\EntityMappingDB.AssemblyInfo.cs
+E:\db\EntityMappingDB\EntityMappingDB\obj\Debug\netstandard2.0\EntityMappingDB.csproj.CoreCompileInputs.cache
+E:\db\EntityMappingDB\EntityMappingDB\obj\Debug\netstandard2.0\EntityMappingDB.dll
+E:\db\EntityMappingDB\EntityMappingDB\obj\Debug\netstandard2.0\EntityMappingDB.pdb

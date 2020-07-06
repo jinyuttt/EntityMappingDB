@@ -28,7 +28,7 @@ namespace EntityMappingDB.DBToEntity
 * 功能描述：AssembleInfo  emit所需要的元数据信息
 * 创 建 者：jinyu 
 * 创建日期：2019 
-* 更新时间 ：2019
+* 更新时间 ：2020
 * ==============================================================================*/
 
     public class DynamicAssembleInfo

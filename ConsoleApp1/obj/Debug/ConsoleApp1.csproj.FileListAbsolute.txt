@@ -1,0 +1,10 @@
+E:\db\EntityMappingDB\ConsoleApp1\bin\Debug\ConsoleApp1.exe.config
+E:\db\EntityMappingDB\ConsoleApp1\bin\Debug\ConsoleApp1.exe
+E:\db\EntityMappingDB\ConsoleApp1\bin\Debug\ConsoleApp1.pdb
+E:\db\EntityMappingDB\ConsoleApp1\bin\Debug\EntityMappingDB.dll
+E:\db\EntityMappingDB\ConsoleApp1\bin\Debug\EntityMappingDB.pdb
+E:\db\EntityMappingDB\ConsoleApp1\obj\Debug\ConsoleApp1.csprojAssemblyReference.cache
+E:\db\EntityMappingDB\ConsoleApp1\obj\Debug\ConsoleApp1.csproj.CoreCompileInputs.cache
+E:\db\EntityMappingDB\ConsoleApp1\obj\Debug\ConsoleApp1.csproj.CopyComplete
+E:\db\EntityMappingDB\ConsoleApp1\obj\Debug\ConsoleApp1.exe
+E:\db\EntityMappingDB\ConsoleApp1\obj\Debug\ConsoleApp1.pdb

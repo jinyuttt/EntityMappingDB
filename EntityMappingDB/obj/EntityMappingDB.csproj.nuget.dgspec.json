@@ -1,37 +1,37 @@
 {
   "format": 1,
   "restore": {
-    "E:\\study\\ss\\EntityMappingDB\\EntityMappingDB\\EntityMappingDB.csproj": {}
+    "E:\\study\\hhh\\EntityMappingDB\\EntityMappingDB\\EntityMappingDB.csproj": {}
   },
   "projects": {
-    "E:\\study\\ss\\EntityMappingDB\\EntityMappingDB\\EntityMappingDB.csproj": {
-      "version": "1.4.4",
+    "E:\\study\\hhh\\EntityMappingDB\\EntityMappingDB\\EntityMappingDB.csproj": {
+      "version": "1.4.6",
       "restore": {
-        "projectUniqueName": "E:\\study\\ss\\EntityMappingDB\\EntityMappingDB\\EntityMappingDB.csproj",
+        "projectUniqueName": "E:\\study\\hhh\\EntityMappingDB\\EntityMappingDB\\EntityMappingDB.csproj",
         "projectName": "EntityMappingDB",
-        "projectPath": "E:\\study\\ss\\EntityMappingDB\\EntityMappingDB\\EntityMappingDB.csproj",
-        "packagesPath": "C:\\Users\\jinyu\\.nuget\\packages\\",
-        "outputPath": "E:\\study\\ss\\EntityMappingDB\\EntityMappingDB\\obj\\",
+        "projectPath": "E:\\study\\hhh\\EntityMappingDB\\EntityMappingDB\\EntityMappingDB.csproj",
+        "packagesPath": "C:\\Users\\dell\\.nuget\\packages\\",
+        "outputPath": "E:\\study\\hhh\\EntityMappingDB\\EntityMappingDB\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "d:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\jinyu\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net5.0"
+          "net7.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "https://aka.ms/maui-preview/index.jsont": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net5.0": {
-            "targetAlias": "net5.0",
+          "net7.0": {
+            "targetAlias": "net7.0",
             "projectReferences": {}
           }
         },
@@ -42,8 +42,8 @@
         }
       },
       "frameworks": {
-        "net5.0": {
-          "targetAlias": "net5.0",
+        "net7.0": {
+          "targetAlias": "net7.0",
           "dependencies": {
             "System.Reflection.Emit.Lightweight": {
               "target": "Package",
@@ -56,30 +56,17 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[5.0.0, 5.0.0]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[5.0.0, 5.0.0]"
-            },
-            {
-              "name": "Microsoft.WindowsDesktop.App.Ref",
-              "version": "[5.0.0, 5.0.0]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.NETCore.App": {
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100-rc.1.21463.6\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
         }
       }
     }

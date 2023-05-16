@@ -5,4 +5,8 @@
     <TargetFramework>net7.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\EntityMappingDB\EntityMappingDB.csproj" />
+  </ItemGroup>
+
 </Project>

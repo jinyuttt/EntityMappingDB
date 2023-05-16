@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Text.RegularExpressions;
 using EntityMappingDB;
@@ -55,13 +56,36 @@ namespace ConsoleApp2
             return reg.IsMatch(str);
 
         }
+
+        public static void Test()
+        {
+            Person person = new Person();
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Id", typeof(int));
+            dt.Columns.Add("DTO", typeof(string));
+            dt.Rows.Add(1, "3e-6");
+            dt.Rows.Add(2, "5000");
+
+          List<Person> lst=  dt.ToEntityList<Person>();//转model
+
+          DataTable dd=  lst.FromEntityToTable();//转换回datatable
+
+           IDataReader idr = null;
+            List<Person> lstm=  idr.ToEntityList<Person>();//转model
+            DataTable dds=   lstm.FromEntityToTableAttribute<Person>();//有属性的转换
+
+        }
     }
 
     public class Person
     {
         public int Id { get; set; }
 
+        [ColumnType(typeof(double))]
         public decimal? DTO { get; set; }
+
+        [DataField("user")]
+        public string Name { get; set; }
     }
 
 }

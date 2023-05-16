@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\study\\hhh\\EntityMappingDB\\EntityMappingDB\\EntityMappingDB.csproj": {}
+    "E:\\study\\hh\\EntityMappingDB\\EntityMappingDB\\EntityMappingDB.csproj": {}
   },
   "projects": {
-    "E:\\study\\hhh\\EntityMappingDB\\EntityMappingDB\\EntityMappingDB.csproj": {
-      "version": "1.4.6",
+    "E:\\study\\hh\\EntityMappingDB\\EntityMappingDB\\EntityMappingDB.csproj": {
+      "version": "1.4.7",
       "restore": {
-        "projectUniqueName": "E:\\study\\hhh\\EntityMappingDB\\EntityMappingDB\\EntityMappingDB.csproj",
+        "projectUniqueName": "E:\\study\\hh\\EntityMappingDB\\EntityMappingDB\\EntityMappingDB.csproj",
         "projectName": "EntityMappingDB",
-        "projectPath": "E:\\study\\hhh\\EntityMappingDB\\EntityMappingDB\\EntityMappingDB.csproj",
+        "projectPath": "E:\\study\\hh\\EntityMappingDB\\EntityMappingDB\\EntityMappingDB.csproj",
         "packagesPath": "C:\\Users\\dell\\.nuget\\packages\\",
-        "outputPath": "E:\\study\\hhh\\EntityMappingDB\\EntityMappingDB\\obj\\",
+        "outputPath": "E:\\study\\hh\\EntityMappingDB\\EntityMappingDB\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -66,7 +66,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     }

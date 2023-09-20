@@ -29,7 +29,7 @@ EntityMappingDB
           DataTable dd=  lst.FromEntityToTable();//转回DataTable  
 2.IDataReader  
             IDataReader idr = null;    
-            List<Person> lstm=  idr.ToEntityList<Person>();  //转model
+            List<Person> lstm=  idr.ToEntityList<Person>();  //转model   
             DataTable dds=   lstm.FromEntityToTableAttribute<Person>();  //转回DataTable
 定义：  
  public class Person  

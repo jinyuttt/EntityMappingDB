@@ -31,6 +31,9 @@ namespace EntityMappingDB
       [AttributeUsage(AttributeTargets.Property,AllowMultiple =false)]
     public class DataFieldAttribute : Attribute
     {
+        /// <summary>
+        /// 列名称
+        /// </summary>
         public string ColumnName { get; set; }
 
         public DataFieldAttribute(string name)

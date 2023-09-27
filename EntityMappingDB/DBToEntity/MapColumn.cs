@@ -42,7 +42,7 @@ namespace EntityMappingDB.DBToEntity
        public string ColumnName { get; set; }
 
        /// <summary>
-       /// 
+       /// 列类型
        /// </summary>
         public string ColType { get; set; }
 

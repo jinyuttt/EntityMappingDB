@@ -141,12 +141,12 @@ namespace EntityMappingDB.CacheBuffers
                         CacheEntity<TValue> entity;
                         if (_cache.TryGetValue(item, out entity))
                         {
-                            CacheEntitySort<TKey> sort = new CacheEntitySort<TKey>() { key = item, rate = entity.UseRate };
+                            CacheEntitySort<TKey> sort = new CacheEntitySort<TKey>() { Key = item, Rate = entity.UseRate };
                             lst.Add(sort);
                         }
                     }
                     //
-                    lst.Sort((x, y) => { return x.rate.CompareTo(y.rate); });
+                    lst.Sort((x, y) => { return x.Rate.CompareTo(y.Rate); });
                     int num = (int)(MaxSize * Scale);
                     if(num>_cache.Count/2)
                     {
@@ -154,7 +154,7 @@ namespace EntityMappingDB.CacheBuffers
                     }
                     for (int i = 0; i < num; i++)
                     {
-                        _cache.Remove(lst[i].key);
+                        _cache.Remove(lst[i].Key);
                     }
                     isRun = false;
                 }

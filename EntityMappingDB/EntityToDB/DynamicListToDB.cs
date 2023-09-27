@@ -450,6 +450,7 @@ namespace EntityMappingDB
         public static DataTable FromEntityToTable<T>(this IList<T> lst)
         {
             DataTable dt = new DataTable();
+            dt.TableName = typeof(T).Name;
             if (!cacheDataTable.ContainsKey(typeof(T).FullName))
             {
                 var properties = typeof(T).GetProperties();
@@ -491,6 +492,7 @@ namespace EntityMappingDB
         {
             EntityDataRow<T> loadrow = FindMap<T>();
             DataTable dt = new DataTable();
+            dt.TableName = typeof(T).Name;
             if (loadrow == null)
             {
                 var properties = typeof(T).GetProperties();

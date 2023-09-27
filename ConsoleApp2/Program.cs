@@ -10,20 +10,21 @@ namespace ConsoleApp2
     {
         static void Main(string[] args)
         {
-            ////string str = "3e-6";
-            ////var ss = Convert.ChangeType(str, typeof(float));
-            ////Convert.ToDecimal(ss);
-            ////DataTable dt = new DataTable();
-            ////dt.Columns.Add("Id", typeof(int));
-            ////dt.Columns.Add("DTO", typeof(string));
-            ////dt.Rows.Add(1, "3e-6");
-            ////dt.Rows.Add(2, "5000");
-            ////var lst = dt.ToEntityList<Person>();
+            string str = "3e-6";
+            var ss = Convert.ChangeType(str, typeof(float));
+            Convert.ToDecimal(ss);
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Id", typeof(int));
+            dt.Columns.Add("DTO", typeof(string));
+            dt.Rows.Add(1, "3e-6");
+            dt.Rows.Add(2, "5000");
+            var lst = dt.ToEntityList<Person>();
+            var ff=dt.ToEntityList<Person>();
             //foreach (DataRow row in dt.Rows)
             //{
             //    MyMethod(row);
             //}
-          //  Test();
+            //  Test();
         }
         public static Person MyMethod(DataRow P_0)
         {
@@ -69,7 +70,8 @@ namespace ConsoleApp2
 
           List<Person> lst=  dt.ToEntityList<Person>();//转model
 
-          DataTable dd=  lst.FromEntityToTable();//转换回datatable
+          DataTable dd=  lst.FromEntityToTable();//转换回datatable  
+          DataTable table=lst.FromEntityToTableAttribute();
 
            IDataReader idr = null;
             List<Person> lstm=  idr.ToEntityList<Person>();//转model

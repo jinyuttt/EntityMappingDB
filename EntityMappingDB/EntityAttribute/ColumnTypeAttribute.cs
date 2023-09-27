@@ -30,7 +30,15 @@ namespace EntityMappingDB
 
     public class ColumnTypeAttribute : Attribute
     {
+        /// <summary>
+        /// 列类型
+        /// </summary>
         public Type ColumnType { get; set; }
+
+        /// <summary>
+        /// 特性
+        /// </summary>
+        /// <param name="type"></param>
         public ColumnTypeAttribute(Type type)
         {
             this.ColumnType = type;

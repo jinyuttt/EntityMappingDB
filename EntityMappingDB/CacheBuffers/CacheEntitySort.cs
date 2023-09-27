@@ -34,7 +34,7 @@ namespace EntityMappingDB.CacheBuffers
 
   internal class CacheEntitySort<TKey>
     {
-        public TKey key { get; set; }
-        public float rate { get; set; }
+        public TKey Key { get; set; }
+        public float Rate { get; set; }
     }
 }

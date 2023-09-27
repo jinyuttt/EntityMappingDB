@@ -18,6 +18,7 @@ EntityMappingDB
 ------------------------------------------------------------
 使用  
 1.datatable  
+
             DataTable dt = new DataTable();    
             dt.Columns.Add("Id", typeof(int));  
             dt.Columns.Add("DTO", typeof(string));  
@@ -28,11 +29,14 @@ EntityMappingDB
 
           DataTable dd=  lst.FromEntityToTable();//转回DataTable  
 2.IDataReader  
+
             IDataReader idr = null;    
             List<Person> lstm=  idr.ToEntityList<Person>();  //转model   
             DataTable dds=   lstm.FromEntityToTableAttribute<Person>();  //转回DataTable
-定义：  
- public class Person  
+定义：
+
+
+    public class Person  
     {  
         public int Id { get; set; }  
 
@@ -45,7 +49,7 @@ EntityMappingDB
 
 ------------------------------------------------------------------------------
 说明：  
-1.如果程序报错：没有找到列，则说明你使用了不同的数据转model,但是这些数据不一样。这时你可以使用重载方法，定一个唯一key  
+1.如果程序报错：没有找到列，则说明你使用了不同的datatable数据转同样model,但是这些数据不一样。这时你可以使用重载方法，定一个唯一key  
 
 2.不出意外，该项目没有升级的必要，除非emit技术有更新  
 

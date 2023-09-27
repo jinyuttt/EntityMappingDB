@@ -85,11 +85,11 @@
   "project": {
     "version": "1.4.7",
     "restore": {
-      "projectUniqueName": "E:\\study\\db\\EntityMappingDB\\EntityMappingDB\\EntityMappingDB.csproj",
+      "projectUniqueName": "E:\\study\\dbmit\\EntityMappingDB\\EntityMappingDB\\EntityMappingDB.csproj",
       "projectName": "EntityMappingDB",
-      "projectPath": "E:\\study\\db\\EntityMappingDB\\EntityMappingDB\\EntityMappingDB.csproj",
+      "projectPath": "E:\\study\\dbmit\\EntityMappingDB\\EntityMappingDB\\EntityMappingDB.csproj",
       "packagesPath": "C:\\Users\\dell\\.nuget\\packages\\",
-      "outputPath": "E:\\study\\db\\EntityMappingDB\\EntityMappingDB\\obj\\",
+      "outputPath": "E:\\study\\dbmit\\EntityMappingDB\\EntityMappingDB\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -25,6 +25,8 @@ using System.Data;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Linq;
+using System.Text;
+using System.Security.Cryptography;
 
 namespace EntityMappingDB
 {
@@ -64,6 +66,61 @@ namespace EntityMappingDB
         //emit里面用到的针对datareader的元数据信息
         private static readonly DynamicAssembleInfo dataRecordAssembly = new DynamicAssembleInfo(typeof(IDataRecord));
 
+       /// <summary>
+       /// 获取列信息
+       /// </summary>
+       /// <param name="dt"></param>
+       /// <returns></returns>
+        private static string GetColumn(DataTable dt)
+        {
+            if(dt == null)
+            {
+                return "";
+            }
+            StringBuilder builder=new StringBuilder(100);
+            foreach(DataColumn col in dt.Columns)
+            {
+                builder.Append(col.ColumnName);
+                builder.Append("_");
+                builder.Append(col.DataType.Name);
+            }
+            return builder.ToString();
+        }
+        
+        /// <summary>
+        /// MD5计算
+        /// </summary>
+        /// <param name="ConvertString"></param>
+        /// <returns></returns>
+        private static string GetStrMd5_32X(string ConvertString)
+        {
+            if(string.IsNullOrEmpty(ConvertString))
+            {
+                return string.Empty;
+            }
+            using (MD5 md5 = MD5.Create())
+            {
+                byte[] inputBytes = Encoding.UTF8.GetBytes(ConvertString);
+                byte[] hashBytes = md5.ComputeHash(inputBytes);
+
+                StringBuilder builder = new StringBuilder();
+                for (int i = 0; i < hashBytes.Length; i++)
+                {
+                    builder.Append(hashBytes[i].ToString("x2"));
+                }
+                return builder.ToString();
+            }
+        }
+
+        /// <summary>
+        /// 获取一个Key，使用MD5是防止获取的列信息过长。
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <returns></returns>
+        private static string GetDataTableKey(DataTable dt)
+        {
+          return  GetStrMd5_32X(GetColumn(dt));
+        }
         /// <summary>
         /// 构造转换动态方法（核心代码），根据assembly可处理datarow和datareader两种转换
         /// </summary>
@@ -99,14 +156,17 @@ namespace EntityMappingDB
                 generator.Emit(OpCodes.Call, assembly.GetValueMethod);//获取数据库值
                 if (property.PropertyType.IsValueType || property.PropertyType == typeof(string))
                 {
+                    //如果是枚举
                     if (property.PropertyType.IsEnum)
                     {
                         if (column.ColType == "Int32")
                         {
+                            //值转枚举
                             generator.Emit(OpCodes.Unbox_Any, property.PropertyType);
                         }
                         else if(column.ColType=="String")
                         {
+                            //名称转换枚举
                             generator.Emit(OpCodes.Ldtoken, property.PropertyType);
                             generator.Emit(OpCodes.Call,typeof(Type).GetMethod("GetTypeFromHandle",new Type[] { typeof(RuntimeTypeHandle) }));
                             generator.Emit(OpCodes.Call, assembly.EnumConvert);
@@ -116,6 +176,7 @@ namespace EntityMappingDB
                     else
                     {
                         LocalBuilder tmp = null;
+                        //是否是可空类型
                         var cur = Nullable.GetUnderlyingType(property.PropertyType);
                         var tmpType = cur;
                         if (cur == null)
@@ -263,7 +324,7 @@ namespace EntityMappingDB
 
 
         /// <summary>
-        /// 检查列,获取DataTable有列的属性集合
+        /// 检查列,获取DataTable列的属性集合
         /// </summary>
         /// <param name="dt">DataTable</param>
         /// <param name="Properties">属性集合</param>
@@ -388,7 +449,8 @@ namespace EntityMappingDB
             string key = dt.TableName;
             if (string.IsNullOrEmpty(key)|| key.ToLower() == "tablename")
             {
-                key = dt.Columns.Count + "_" + dataRowAssembly.MethodName + typeof(T).FullName;
+               
+                key =string.Format("{0}_{1}_{2}", GetDataTableKey(dt), dataRowAssembly.MethodName , typeof(T).FullName);
             }
           
             LoadDataRow<T> load = null;
@@ -435,8 +497,8 @@ namespace EntityMappingDB
                 if (string.IsNullOrEmpty(key)|| key.ToLower() == "tablename")
                 {
                     //如果DataTable名称没有，则按照所有列名称定Key
-                    key = dt.Columns.Count + "_" + dataRowAssembly.MethodName + typeof(T).FullName;
-                  
+                    key = string.Format("{0}_{1}_{2}", GetDataTableKey(dt), dataRowAssembly.MethodName, typeof(T).FullName);
+
                 }
             }
             LoadDataRow<T> load = (LoadDataRow<T>)BuildMethod<T>(dataRowAssembly, mapColumns,key).CreateDelegate(typeof(LoadDataRow<T>));
@@ -456,7 +518,8 @@ namespace EntityMappingDB
                 if (string.IsNullOrEmpty(key))
                 {
                     //如果DataTable名称没有，则按照所有列名称定Key
-                    key = dt.Columns.Count + "_" + dataRowAssembly.MethodName + type.FullName;
+                    key = string.Format("{0}_{1}_{2}", GetDataTableKey(dt), dataRowAssembly.MethodName, type.FullName);
+                  
 
                     
                 }

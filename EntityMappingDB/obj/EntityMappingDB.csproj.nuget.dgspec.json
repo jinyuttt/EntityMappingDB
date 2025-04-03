@@ -1,28 +1,28 @@
 {
   "format": 1,
   "restore": {
-    "E:\\study\\dbmit\\EntityMappingDB\\EntityMappingDB\\EntityMappingDB.csproj": {}
+    "E:\\github\\EntityMappingDB\\EntityMappingDB\\EntityMappingDB.csproj": {}
   },
   "projects": {
-    "E:\\study\\dbmit\\EntityMappingDB\\EntityMappingDB\\EntityMappingDB.csproj": {
+    "E:\\github\\EntityMappingDB\\EntityMappingDB\\EntityMappingDB.csproj": {
       "version": "1.4.8",
       "restore": {
-        "projectUniqueName": "E:\\study\\dbmit\\EntityMappingDB\\EntityMappingDB\\EntityMappingDB.csproj",
+        "projectUniqueName": "E:\\github\\EntityMappingDB\\EntityMappingDB\\EntityMappingDB.csproj",
         "projectName": "EntityMappingDB",
-        "projectPath": "E:\\study\\dbmit\\EntityMappingDB\\EntityMappingDB\\EntityMappingDB.csproj",
-        "packagesPath": "C:\\Users\\dell\\.nuget\\packages\\",
-        "outputPath": "E:\\study\\dbmit\\EntityMappingDB\\EntityMappingDB\\obj\\",
+        "projectPath": "E:\\github\\EntityMappingDB\\EntityMappingDB\\EntityMappingDB.csproj",
+        "packagesPath": "C:\\Users\\jinyu\\.nuget\\packages\\",
+        "outputPath": "E:\\github\\EntityMappingDB\\EntityMappingDB\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\dell\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\jinyu\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net7.0"
+          "net8.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -30,8 +30,8 @@
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net7.0": {
-            "targetAlias": "net7.0",
+          "net8.0": {
+            "targetAlias": "net8.0",
             "projectReferences": {}
           }
         },
@@ -39,11 +39,17 @@
           "warnAsError": [
             "NU1605"
           ]
-        }
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.100"
       },
       "frameworks": {
-        "net7.0": {
-          "targetAlias": "net7.0",
+        "net8.0": {
+          "targetAlias": "net8.0",
           "dependencies": {
             "System.Reflection.Emit.Lightweight": {
               "target": "Package",
@@ -66,7 +72,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.307\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
